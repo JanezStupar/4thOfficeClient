@@ -35,10 +35,10 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ApiClient.cs" />
+    <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Compile Include="ApiClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+  <property name="OutputDir" value="../build"/>
+  <property name="Major" value="0" overwrite="false" />
+  <property name="Minor" value="1" overwrite="false" />
+  <property name="Build" value="0" overwrite="false" />
+  <property name="Revision" value="0" overwrite="false" />
+  <property name="Debug" value="true" overwrite="false"/>
+  
+  <property name="Nuget.Id" value="4thOfficeClient" overwrite="false"/>
+ 
+  <property name="fwsdkdir" value="${framework::get-sdk-directory('net-4.0')}" />
+  <property name="msbuild" value="${framework::get-framework-directory('net-4.0')}\msbuild.exe"/>
+  <property name="iisexpress" value="c:\Program Files\IIS Express\iisexpress.exe" />
+  
+  <property name="PackageName" value="4thOfficeClient" />
+  
+  <target name="clean" >
+    <delete includeemptydirs="false">
+      <fileset basedir=".">
+        <include name="bin/**" />
+		<include name="obj/**" />
+      </fileset>
+    </delete>
+  </target>
+  
+  <target name="dev">
+  </target>
+
+  <target name="build" depends="dev">
+    <exec program="${msbuild}" basedir="." commandline="4thOfficeClient.sln /t:Build /p:Configuration=Debug /consoleloggerparameters:Summary"/>   
+  </target>
+
+  <target name="test" description="Perform tests" depends="">
+    <exec workingdir="."
+      program="External\Nunit\nunit-console.exe">
+      <arg value="/labels" />
+      <arg value="Test\IntegrationTest\bin\Debug\RestClient.Test.dll" />
+      <arg value="/xml=Test\IntegrationTest\RestClient.Test.xml" />
+    </exec>
+  </target>  
+  
+  <target name="package" depends="package.spec package.pack">
+  </target>
+    	
+  <target name="package.spec">
+    <exec workingdir="Package"
+      program="Tools\Nuget\nuget.exe">
+      <arg value="spec" />
+	  <arg value="-a" />
+	  <arg value="..\bin\debug\${PackageName}.dll" />
+    </exec>
+  </target>
+  
+  <target name="package.pack">
+	<mkdir dir="Package" />
+    <exec workingdir="Package"
+      program="Tools\Nuget\nuget.exe">
+      <arg value="pack" />
+      <arg value="${PackageName}.nuspec" />
+    </exec>
+  </target>
+    
+  <target name="all" depends="clean, dev, build, test, package" >
+  </target>
+</project>
