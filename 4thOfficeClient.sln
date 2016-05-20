@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4thOfficeClient", "src/4thOfficeClient.csproj", "{D8707CCA-7BBF-4F26-87DF-22A47EAADCE2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4thOfficeClient", "src\4thOfficeClient.csproj", "{D8707CCA-7BBF-4F26-87DF-22A47EAADCE2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{2954F112-6836-435F-91B7-255962D6A6BA}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		build.build = build.build
-		LICENSE = LICENSE
 		nant.cmd = nant.cmd
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Package", "Package", "{180AC223-ACA6-407E-9A62-3BDFB2DD8D75}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -28,5 +32,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{180AC223-ACA6-407E-9A62-3BDFB2DD8D75} = {2954F112-6836-435F-91B7-255962D6A6BA}
 	EndGlobalSection
 EndGlobal
