@@ -46,7 +46,7 @@
     	
   <target name="package.spec">
     <exec workingdir="Package"
-      program="Tools\Nuget\nuget.exe">
+      program="build\tools\Nuget\nuget.exe">
       <arg value="spec" />
 	  <arg value="-a" />
 	  <arg value="..\bin\debug\${PackageName}.dll" />
@@ -56,7 +56,7 @@
   <target name="package.pack">
 	<mkdir dir="Package" />
     <exec workingdir="Package"
-      program="Tools\Nuget\nuget.exe">
+      program="build\tools\Nuget\nuget.exe">
       <arg value="pack" />
       <arg value="${PackageName}.nuspec" />
     </exec>
