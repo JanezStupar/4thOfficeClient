@@ -2597,21 +2597,6 @@
   </complexType>
   <element name="ContextBase_13" type="bc:ContextBase_13" />
 
-  <complexType name="ListOfContexts_13">
-    <sequence>
-      <element name="Context" type="bc:ContextBase_13" minOccurs="1" maxOccurs="unbounded"/>
-    </sequence>
-  </complexType>
-  <element name="ListOfContexts_13" type="bc:ListOfContexts_13"/>
-
-  <complexType name="ListOfContextsPage_13">
-    <sequence>
-      <element name="Contexts" type="bc:ListOfContexts_13" minOccurs="1" maxOccurs="unbounded"/>
-      <element name="Paging" type="bc:Paging_13" minOccurs="0" />
-    </sequence>
-  </complexType>
-  <element name="ListOfContextsPage_13" type="bc:ListOfContextsPage_13"/>
-
   <!-- Context type (v13) -->
   <simpleType name="ContextType_13">
     <restriction base="string">
@@ -2639,62 +2624,6 @@
   </simpleType>
   <element name="ContextType_13" type="bc:ContextType_13"/>
 
-  <!-- User context -->
-  <complexType name ="ContextUser_13">
-    <complexContent>
-      <extension base="bc:ContextBase_13">
-        <sequence>
-          <element name="OrganizationPositionId" type="long" minOccurs="1" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="ContextUser_13" type="bc:ContextUser_13"/>
-
-  <!-- Group context -->
-  <complexType name ="ContextGroup_13">
-    <complexContent>
-      <extension base="bc:ContextBase_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="ContextGroup_13" type="bc:ContextGroup_13"/>
-
-  <!-- Project context -->
-  <complexType name ="ContextProject_13">
-    <complexContent>
-      <extension base="bc:ContextBase_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="ContextProject_13" type="bc:ContextProject_13"/>
-
-  <!-- Customer context -->
-  <complexType name ="ContextCustomer_13">
-    <complexContent>
-      <extension base="bc:ContextBase_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="ContextCustomer_13" type="bc:ContextCustomer_13"/>
-
-  <!-- Application context -->
-  <complexType name ="ContextApplication_13">
-    <complexContent>
-      <extension base="bc:ContextBase_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="ContextApplication_13" type="bc:ContextApplication_13"/>
-
   <!-- Sync application context -->
   <complexType name ="ContextSyncApplication_13">
     <complexContent>
@@ -2705,82 +2634,10 @@
     </complexContent>
   </complexType>
   <element name="ContextSyncApplication_13" type="bc:ContextSyncApplication_13"/>
+
+  <!--======================================================================-->
+  <!--== Activity chart ====================================================-->
   
-  <!-- Context info
-       - Version: 3.6
-       - Content types:
-         - application/vnd.marg.bcsocial.context.info-v3.6+xml
-         - application/vnd.marg.bcsocial.context.info-v3.6+json
-  -->
-  <complexType name ="ContextInfo_13">
-    <sequence>
-      <!--Branding info -->
-      <element name="BrandingInfo" type="bc:BrandingInfo_13" minOccurs="0" />
-      <!--Pinning info -->
-      <element name="PinningInfo" type="bc:PinningInfo_13" minOccurs="0" />
-    </sequence>
-  </complexType>
-  <element name="ContextInfo_13" type="bc:ContextInfo_13"/>
-
-  <complexType name ="ContextActivityBase_13">
-    <sequence>
-      <element name="Context" type="bc:ContextBase_13" minOccurs="1" />
-      <element name="TimeSpan" type="bc:TimeSpan_13" minOccurs="1" />
-      <element name="NoDataYet" type="boolean" minOccurs="1" />
-    </sequence>
-  </complexType>
-  <element name="ContextActivityBase_13" type="bc:ContextActivityBase_13"/>
-
-  <!-- Context leaderboard
-       - Version: 3.6
-       - Content types:
-         - application/vnd.marg.bcsocial.context.activity.leaderboard-v3.6+xml
-         - application/vnd.marg.bcsocial.context.activity.leaderboard-v3.6+json
-  -->
-  <complexType name ="ContextActivityLeaderboard_13">
-    <complexContent>
-      <extension base="bc:ContextActivityBase_13">
-        <sequence>
-          <element name="Members" type="bc:ListOfLeaderboardMembers_13" minOccurs="1" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="ContextActivityLeaderboard_13" type="bc:ContextActivityLeaderboard_13"/>
-
-  <complexType name ="LeaderboardMember_13">
-    <sequence>
-      <element name="User" type="bc:User_13" minOccurs="1" />
-      <element name="ActivityIndex" type="long" />
-    </sequence>
-  </complexType>
-  <element name="LeaderboardMember_13" type="bc:LeaderboardMember_13"/>
-
-  <complexType name="ListOfLeaderboardMembers_13">
-    <sequence>
-      <element name="LeaderboardMember" type="bc:LeaderboardMember_13" minOccurs="1" maxOccurs="unbounded"/>
-    </sequence>
-  </complexType>
-  <element name="ListOfLeaderboardMembers_13" type="bc:ListOfLeaderboardMembers_13"/>
-
-  <!-- Context activity chart
-       - Version: 3.6
-       - Content types:
-         - application/vnd.marg.bcsocial.context.activity.chart-v3.6+xml
-         - application/vnd.marg.bcsocial.context.activity.chart-v3.6+json
-  -->
-  <complexType name ="ContextActivityChart_13">
-    <complexContent>
-      <extension base="bc:ContextActivityBase_13">
-        <sequence>
-          <element name="SocialActivityList" type="bc:ActivityChart_13" minOccurs="1" />
-          <element name="DocumentActivityList" type="bc:ActivityChart_13" minOccurs="1" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="ContextActivityChart_13" type="bc:ContextActivityChart_13"/>
- 
   <!-- Activity chart -->
   <complexType name="ActivityChart_13">
     <sequence>
@@ -2808,155 +2665,8 @@
   <element name="ActivityItem_13" type="bc:ActivityItem_13"/>
 
   <!--======================================================================-->
-  <!--== Context pinning ==================================================-->
-
-  <!-- Pinning information -->
-  <complexType name="PinningInfo_13">
-    <sequence>
-      <!--Flag indicating if item is pinnable.-->
-      <element name="IsPinnable" type="boolean" minOccurs="0" nillable="true" />
-      <!--Flag indicating if item is pinned for logged-on user.-->
-      <element name="IsPinned" type="boolean" minOccurs="0" nillable="true" />
-    </sequence>
-  </complexType>
-  <element name="PinningInfo_13" type="bc:PinningInfo_13" />
+  <!--== Sort direction ====================================================-->
   
-  <!-- Context pinning info
-       - Version: 3.6
-       - Content types:
-         - application/vnd.marg.bcsocial.context.pinning.info-v3.6+xml
-         - application/vnd.marg.bcsocial.context.pinning.info-v3.6+json
-  -->
-  <complexType name="ContextPinningInfo_13">
-    <complexContent>
-      <extension base="bc:PinningInfo_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="ContextPinningInfo_13" type="bc:ContextPinningInfo_13" />
-  
-  <!--======================================================================-->
-  <!--== Context branding ==================================================-->
-
-  <!-- Context branding -->
-  <complexType name="BrandingInfo_13">
-    <sequence>
-      <!--Flag indicating if branding feature is available on selected community.-->
-      <element name="Available" type="boolean" minOccurs="0" />
-      <!--Flag indicating if logged-on user can manage context branding on selected community.-->
-      <element name="CanManage" type="boolean" minOccurs="0" />
-    </sequence>
-  </complexType>
-  <element name="BrandingInfo_13" type="bc:BrandingInfo_13" />
-
-  <!-- Context cover photo -->
-  <complexType name="ContextCoverImage_13">
-    <complexContent>
-      <extension base="bc:ResourceBase_13">
-        <sequence>
-          <element name="Image" type="bc:File_4" minOccurs="1" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="ContextCoverImage_13" type="bc:ContextCoverImage_13" />
- 
-  <!-- Selected context cover photo -->
-  <complexType name="ContextCoverImageSelected_13">
-    <complexContent>
-      <extension base="bc:ContextCoverImage_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="ContextCoverImageSelected_13" type="bc:ContextCoverImageSelected_13" />
-  
-  <!--======================================================================-->
-  <!--== Sort ==============================================================-->
-
-  <!-- Sort action -->
-  <complexType name ="SortActionBase_13">
-    <complexContent>
-      <extension base="bc:ResourceBase_13">
-        <sequence>
-          <element name="DirectionHint" type="bc:SortDirectionHint_13" minOccurs="1" />
-          <element name="DefaultDirection" type="bc:SortDirection" minOccurs="1" />
-          <!--Set when this sort action is selected.-->
-          <element name="IsSelected" type="bc:SelectedSortAction_13" minOccurs="0" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="SortActionBase_13" type="bc:SortActionBase_13"/>
-  
-  <complexType name="SelectedSortAction_13">
-    <sequence>
-      <element name="Direction" type="bc:SortDirection" minOccurs="1" />
-    </sequence>
-  </complexType>
-  <element name="SelectedSortAction_13" type="bc:SelectedSortAction_13"/>
-
-  <complexType name="ListOfSortActions_13">
-    <sequence>
-      <element name="SortAction" type="bc:SortActionBase_13" minOccurs="1" maxOccurs="unbounded"/>
-    </sequence>
-  </complexType>
-  <element name="ListOfSortActions_13" type="bc:ListOfSortActions_13"/>
-  
-  <complexType name ="SortActionByName_13">
-    <complexContent>
-      <extension base="bc:SortActionBase_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="SortActionByName_13" type="bc:SortActionByName_13"/>
-  
-    <complexType name ="SortActionByCreatedDate_13">
-    <complexContent>
-      <extension base="bc:SortActionBase_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="SortActionByCreatedDate_13" type="bc:SortActionByCreatedDate_13"/>
-  
-  <complexType name ="SortActionByModifiedDate_13">
-    <complexContent>
-      <extension base="bc:SortActionBase_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="SortActionByModifiedDate_13" type="bc:SortActionByModifiedDate_13"/>
-  
-  <complexType name ="SortActionByStatus_13">
-    <complexContent>
-      <extension base="bc:SortActionBase_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="SortActionByStatus_13" type="bc:SortActionByStatus_13"/>
-  
-  <complexType name ="SortActionCustom_13">
-    <complexContent>
-      <extension base="bc:SortActionBase_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="SortActionCustom_13" type="bc:SortActionCustom_13"/>
-
-  <!-- Sort direction (v13) -->
   <simpleType name="SortDirection">
     <restriction base="string">
       <enumeration value="Ascending"/>
@@ -2964,193 +2674,22 @@
     </restriction>
   </simpleType>
   <element name="SortDirection" type="bc:SortDirection"/>
-  
-  <!-- Sort action id (v13) -->
+
   <simpleType name="SortActionId">
     <restriction base="string">
       <enumeration value="ByName"/>
       <enumeration value="ByCreatedDate"/>
-      <enumeration value="ByModifiedDate"/> 
+      <enumeration value="ByModifiedDate"/>
       <enumeration value="ByMostUsed"/>
       <enumeration value="ByLastEvent"/>
       <enumeration value="BySize"/>
     </restriction>
   </simpleType>
   <element name="SortActionId" type="bc:SortActionId"/>
-  
-  <complexType name = "SortDirectionHint_13">
-    <sequence>
-      <element name="Ascending" type="string" minOccurs="1" /> 
-      <element name="Descending" type="string" minOccurs="1" />
-    </sequence>
-  </complexType>
-  <element name="SortDirectionHint_13" type="bc:SortDirectionHint_13"/>
 
   <!--======================================================================-->
   <!--== Drive =============================================================-->
- 
-  <!-- Drive resource 
-     - Version: 3.6
-     - Content types:
-       - application/vnd.marg.bcsocial.drive-v3.6+xml
-       - application/vnd.marg.bcsocial.drive-v3.6+json
-  -->
-  <complexType name = "Drive_13">
-    <sequence>
-      <element name="Context" type="bc:ContextBase_13" minOccurs="1" /> 
-      <element name="DriveItemGroupList" type="bc:ListOfDriveItemGroups_13" minOccurs="1" />
-      <element name="AvailableFilterGroupList" type="bc:ListOfFilterGroups_13" minOccurs="1" />
       
-      <!--Available sort action list-->
-      <element name="AvailableSortActionList" type="bc:ListOfSortActions_13" minOccurs="1" />
-      <!--Selected sort direction-->
-      <element name="SelectedSortDirection" type="bc:SortDirection" minOccurs="1" />
-      <!--Selected sort action id-->
-      <element name="SelectedSortActionId" type="bc:SortDirection" minOccurs="1" />
-    </sequence>
-  </complexType>
-  <element name="Drive_13" type="bc:Drive_13"/>
-  
-  <!-- Filter list for drive
-     - Version: 3.6
-     - Content types:
-       - application/vnd.marg.bcsocial.drive.filter.list-v3.6+xml
-       - application/vnd.marg.bcsocialdrive.filter.list-v3.6+json
-  -->
-  <complexType name="DriveFilterList_13">
-    <complexContent>
-      <extension base="bc:DashboardFilterListBase_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="DriveFilterList_13" type="bc:DriveFilterList_13"/>
-  
-  <!-- Batch of drive items (documents and/or drawers).
-     - Version: 3.6
-     - Content types:
-       - application/vnd.marg.bcsocial.drive.item.batch-v3.6+xml 
-       - application/vnd.marg.bcsocial.drive.item.batchs-v3.6+json
-    -->
-  <complexType name ="DriveItemBatch_13">
-    <sequence>
-    </sequence>
-  </complexType>
-  <element name="DriveItemBatch_13" type="bc:DriveItemBatch_13"/>
-  
-  <!-- Parent drawer for batch of drive items (documents and/or drawers).
-     - Version: 3.6
-     - Content types:
-       - application/vnd.marg.bcsocial.drive.item.batch.parent.drawer-v3.6+xml 
-       - application/vnd.marg.bcsocial.drive.item.batch.parent.drawer-v3.6+json
-    -->
-  <complexType name ="DriveItemBatchParentDrawer_13">
-    <complexContent>
-      <extension base="bc:DriveItemBatch_13">
-        <sequence>
-          <!--Drive context-->
-          <element name="Context" type="bc:ContextBase_13" minOccurs="1" />
-          <!--If of parent drawer. Context root if not set.-->
-          <element name="ParentDrawerId" type ="string" minOccurs="0" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="DriveItemBatchParentDrawer_13" type="bc:DriveItemBatchParentDrawer_13"/>
-  
-  <!-- Share list for batch of drive items.
-     - Version: 3.6
-     - Content types:
-       - application/vnd.marg.bcsocial.drive.item.batch.share.list-v3.6+xml 
-       - application/vnd.marg.bcsocial.drive.item.batch.share.list-v3.6+json
-    -->
-  <complexType name ="DriveItemBatchShareList_13">
-    <complexContent>
-      <extension base="bc:DriveItemBatch_13">
-        <sequence>
-          <element name="ShareList" type ="bc:ListOfResources_13" minOccurs="1" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="DriveItemBatchShareList_13" type="bc:DriveItemBatchShareList_13"/>
-
-  
-  <!-- Group of drive items.
-     - Version: 3.6
-     - Content types:
-       - application/vnd.marg.bcsocial.drive.item.group-v3.6+xml
-       - application/vnd.marg.bcsocial.drive.item.group-v3.6+json
-  -->
-  <complexType name ="DriveItemGroupBase_13">
-    <complexContent>
-      <extension base="bc:ResourceBase_13">
-        <sequence>
-          <element name="Context" type="bc:ContextBase_13" minOccurs="1" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="DriveItemGroupBase_13" type="bc:DriveItemGroupBase_13"/>
-  
-  <complexType name="ListOfDriveItemGroups_13">
-    <sequence>
-      <element name="DriveItemGroup" type="bc:DriveItemGroupBase_13" minOccurs="1" maxOccurs="unbounded"/>
-    </sequence>
-  </complexType>
-  <element name="ListOfDriveItemGroups_13" type="bc:ListOfDriveItemGroups_13"/>
-  
-  <!-- Group of document drive items.
-     - Version: 3.6
-     - Content types:
-       - application/vnd.marg.bcsocial.drive.item.group.documents-v3.6+xml
-       - application/vnd.marg.bcsocial.drive.item.group.documents-v3.6+json
-  -->
-  <complexType name ="DriveItemGroupDocuments_13">
-    <complexContent>
-      <extension base="bc:DriveItemGroupBase_13">
-        <sequence>
-          <element name="DocumentListPage" type="bc:ListOfDocumentsPage_13" minOccurs="1" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="DriveItemGroupDocuments_13" type="bc:DriveItemGroupDocuments_13"/>
-  
-  <!-- Group of drawer drive items.
-     - Version: 3.6
-     - Content types:
-       - application/vnd.marg.bcsocial.drive.item.group.drawers-v3.6+xml
-       - application/vnd.marg.bcsocial.drive.item.group.drawers-v3.6+json
-  -->
-  <complexType name ="DriveItemGroupDrawers_13">
-    <complexContent>
-      <extension base="bc:DriveItemGroupBase_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="DriveItemGroupDrawers_13" type="bc:DriveItemGroupDrawers_13"/>
-  
-  <!-- Group of nested context drive items. 
-     - Version: 3.6
-     - Content types:
-       - application/vnd.marg.bcsocial.drive.item.group.drivecontexts-v3.6+xml
-       - application/vnd.marg.bcsocial.drive.item.group.drivecontexts-v3.6+json
-  -->
-  <complexType name ="DriveItemGroupDriveContexts_13">
-    <complexContent>
-      <extension base="bc:DriveItemGroupBase_13">
-        <sequence>
-          <element name="DriveContexts" type="bc:ListOfContextsPage_13" minOccurs="1" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="DriveItemGroupDriveContexts_13" type="bc:DriveItemGroupDriveContexts_13"/>
- 
   <!-- Drive resource 
      - Version: 4.0
      - Content types:
@@ -3160,8 +2699,6 @@
   <complexType name = "Drive_14">
     <sequence>
       <element name="DriveItemGroupList" type="bc:ListOfDriveItemGroups_14" minOccurs="0" />
-      <!--Available sort action list-->
-      <element name="AvailableSortActionList" type="bc:ListOfSortActions_13" minOccurs="0" />
     </sequence>
   </complexType>
   <element name="Drive_14" type="bc:Drive_14"/>
@@ -3203,126 +2740,7 @@
     </complexContent>
   </complexType>
   <element name="DriveItemGroupDocuments_14" type="bc:DriveItemGroupDocuments_14"/>
-  
-  <!-- Group of remote resources drive items.
-     - Version: 4.0
-     - Content types:
-       - application/vnd.4thoffice.drive.item.group.remote.resources-v4.0+xml
-       - application/vnd.4thoffice.drive.item.group.remote.resources-v4.0+json
-  -->
-  <complexType name ="DriveItemGroupRemoteResources_14">
-    <complexContent>
-      <extension base="bc:DriveItemGroupBase_13">
-        <sequence>
-          <element name="ResourceListPage" type="bc:ListOfResourcesPage_13" minOccurs="1" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="DriveItemGroupRemoteResources_14" type="bc:DriveItemGroupRemoteResources_14"/>
-  
-  <!-- Group of remote resources drive items.
-     - Version: 5.0
-     - Content types:
-       - application/vnd.4thoffice.drive.item.group.remote.resources-v5.0+xml
-       - application/vnd.4thoffice.drive.item.group.remote.resources-v5.0+json
-  -->
-  <complexType name ="DriveItemGroupRemoteResources_15">
-    <complexContent>
-      <extension base="bc:DriveItemGroupBase_14">
-        <sequence>
-          <element name="ResourceListPage" type="bc:ListOfResourcesPage_13" minOccurs="1" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="DriveItemGroupRemoteResources_15" type="bc:DriveItemGroupRemoteResources_15"/>
-  
-  <!--======================================================================-->
-  <!--== Filter ============================================================-->
-   
-  <complexType name = "FilterBase_13">
-    <sequence>
-    </sequence>
-  </complexType>
-  <element name="FilterBase_13" type="bc:FilterBase_13"/>
-    
-  <complexType name="ListOfFilters_13">
-    <sequence>
-      <element name="Filter" type="bc:FilterBase_13" minOccurs="1" maxOccurs="unbounded"/>
-    </sequence>
-  </complexType>
-  <element name="ListOfFilters_13" type="bc:ListOfFilters_13"/>
-
-  <complexType name = "FilterItem_13">
-    <complexContent>
-      <extension base="bc:FilterBase_13">
-        <sequence>
-          <element name="Id" type="string" minOccurs="1" />
-          <element name="Name" type="string" minOccurs="1" />
-          <element name="Description" type="string" minOccurs="1" />
-          <element name="NumberOfItems" type="long" minOccurs="0" nillable="true" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="FilterItem_13" type="bc:FilterItem_13"/>
-
-  <complexType name = "FilterItemByName_13">
-    <complexContent>
-      <extension base="bc:FilterItem_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="FilterItemByName_13" type="bc:FilterItemByName_13"/>
- 
-  <complexType name = "FilterItemByTaskInstruction_13">
-    <complexContent>
-      <extension base="bc:FilterItem_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="FilterItemByTaskInstruction_13" type="bc:FilterItemByTaskInstruction_13"/>
-    
-  <complexType name = "FilterItemByTaskSender_13">
-    <complexContent>
-      <extension base="bc:FilterItem_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="FilterItemByTaskSender_13" type="bc:FilterItemByTaskSender_13"/>
-  
-  <complexType name = "FilterItemBySharedWith_13">
-    <complexContent>
-      <extension base="bc:FilterItem_13">
-        <sequence>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="FilterItemBySharedWith_13" type="bc:FilterItemBySharedWith_13"/>
- 
-  <complexType name = "FilterGroup_13">
-    <sequence>
-      <element name="Name" type="string" minOccurs="1" />
-      <element name="FilterList" type="bc:ListOfFilters_13" minOccurs="0" />
-    </sequence>
-  </complexType>
-  <element name="FilterGroup_13" type="bc:FilterGroup_13"/>
-    
-  <complexType name="ListOfFilterGroups_13">
-    <sequence>
-      <element name="FilterGroup" type="bc:FilterGroup_13" minOccurs="1" maxOccurs="unbounded"/>
-    </sequence>
-  </complexType>
-  <element name="ListOfFilterGroups_13" type="bc:ListOfFilterGroups_13"/>
-  
+        
   <!--======================================================================-->
   <!--== Event logging =====================================================-->
 
