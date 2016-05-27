@@ -1109,21 +1109,6 @@
     </sequence>
   </complexType>
   <element name="Device_4" type="bc:Device_4"/>
-
-  <!--======================================================================-->
-  <!--== Actor =============================================================-->
-
-  <!-- Actor entity (can be user or group) -->
-  <complexType name ="Actor_1">
-    <sequence>
-      <element name="Id" type="long" minOccurs="0" />
-      <!-- Assigned email address. 
-           Note: This is not the logon email address. -->
-      <element name="Email" type="string" minOccurs="0" />
-	    <element name="Name" type="string" minOccurs="0" />
-    </sequence>
-  </complexType>
-  <element name="Actor_1" type="bc:Actor_1"/>
     
   <!--======================================================================-->
   <!--== Actor (user or group) =============================================-->
@@ -1164,71 +1149,7 @@
   
   <!--======================================================================-->
   <!--== User ==============================================================-->
- 
-  <!-- User resource 
-     - Version: 3.6
-     - Content types:
-       - application/vnd.marg.bcsocial.user-3.6+xml
-       - application/vnd.marg.bcsocial.user-3.6+json
-  -->
-  <complexType name ="User_13">
-    <complexContent>
-      <extension base="bc:ActorBase_13">
-        <sequence>
-          <!-- First name -->
-          <element name="FirstName" type="string" minOccurs="0" />
-          <!-- Last name -->
-          <element name="LastName" type="string" minOccurs="0" />
-          <!-- Nickname -->
-          <element name="NickName" type="string" minOccurs="0" />
-          <!-- Job title -->
-          <element name="JobTitle" type="string" minOccurs="0" />
-          <!-- User email used for u/p logon -->
-          <element name="UserEmail" type="string" minOccurs="0" />
-          <!-- Email address used to send notifications to. -->
-          <element name="NotificationEmail" type="string" minOccurs="0" />
-          <!-- Description -->
-          <element name="Description" type="string" minOccurs="0" />
-          <!-- Culture code -->
-          <element name="CultureCode" type="string" minOccurs="0" />
-          <!-- Region code -->
-          <element name="RegionCode" type="string" minOccurs="0" />
-          <element name="SkypeProfile" type="string" minOccurs="0" />
-          <element name="TwitterProfile" type="string" minOccurs="0" />
-          <element name="LinkedInProfile" type="string" minOccurs="0" />
-          <element name="CustomStatus" type="string" minOccurs="0" />
-          <!-- Authentication list. -->
-          <element name="AuthenticationList" type="bc:ListOfAuthentications_13" minOccurs="0" />
-          <element name="IsGuest" type="boolean" minOccurs="0" />
-           <!-- After successfull user registration this field is populated with access and refresh tokens 
-                which can be used for further authorization purposes. -->
-            <element name="Token" type ="bc:AccessToken_14" minOccurs="0" />
-           <!-- Assigned email address. -->
-          <element name="AssignedEmail" type="string" minOccurs="0" />
-          <!-- Time zone id -->
-          <element name="TimeZoneId" type="string" minOccurs="0" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="User_13" type="bc:User_13"/>
-  
-  <complexType name="ListOfUsers_13">
-    <sequence>
-      <element name="User" type="bc:User_13" minOccurs="1" maxOccurs="unbounded" />
-    </sequence>
-  </complexType>
-  <element name="ListOfUsers_13" type="bc:ListOfUsers_13" />
-  
-  <!-- List of users with paging info (v13) -->
-  <complexType name="ListOfUsersPage_13">
-    <sequence>
-      <element name="Users" type="bc:ListOfUsers_13" minOccurs="1" />
-      <element name="Paging" type="bc:Paging_13" minOccurs="1" />
-    </sequence>
-  </complexType>
-  <element name="ListOfUsersPage_13" type="bc:ListOfUsersPage_13"/>
-  
+   
   <!-- User resource 
      - Version: 4.0
      - Content types:

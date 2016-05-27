@@ -13,6 +13,10 @@
   <property name="fwsdkdir" value="${framework::get-sdk-directory('net-4.0')}" />
   <property name="msbuild" value="${framework::get-framework-directory('net-4.0')}\msbuild.exe"/>
   <property name="iisexpress" value="c:\Program Files\IIS Express\iisexpress.exe" />
+  <property name="svcutil" value="${fwsdkdir}/svcutil.exe" 
+            if="${file::exists(fwsdkdir + '/svcutil.exe')}" />
+  <property name="svcutil" value="C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools\x64\SvcUtil.exe" 
+            if="${file::exists('C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools\x64\SvcUtil.exe')}" />
   
   <property name="PackageName" value="4thOfficeClient" />
   
@@ -24,7 +28,21 @@
       </fileset>
     </delete>
   </target>
-  
+
+  <property name="apiDataContract" value="ApiDataContract" />
+  <exec workingdir="src/DataContract" program="${svcutil}">
+    <arg value="${apiDataContract}.xsd" />
+    <arg value="/dconly" />
+    <arg value="/serializable" />
+    <arg value="/importXmlTypes" />
+    <arg value="/serializer:DataContractSerializer" />
+    <!--<arg value="/namespace:*,${schemaSdkNamespace}.WebService" />-->
+    <arg value="/o:${apiDataContract}.cs" />
+  </exec>s
+  <copymodified
+    file="${apiDataContract}.cs"
+    tofile="${apiDataContract}.Designer.cs"/>
+
   <target name="dev">
   </target>
 
