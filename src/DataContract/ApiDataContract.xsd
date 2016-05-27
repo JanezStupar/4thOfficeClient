@@ -382,64 +382,7 @@
       
   <!--======================================================================-->
   <!--== Document ==========================================================-->
-  
-  <!-- Document resource
-     - Version: 3.6
-     - Content types:
-       - application/vnd.marg.bcsocial.document-v3.6+xml 
-       - application/vnd.marg.bcsocial.document-v3.6+json
-    -->
-  <complexType name="Document_13">
-    <complexContent>
-      <extension base="bc:ResourceBase_13">
-        <sequence>
-          <!-- Id of community where document was created -->
-          <element name="CommunityId" type="long" minOccurs="0" />
-          <!-- Created date and time-->
-          <element name="Created" type="dateTime" minOccurs="0" />
-          <!-- Modified date and time -->
-          <element name="Modified" type="dateTime" minOccurs="0" />
-          <!-- Document title -->
-          <element name="Title" type ="string" minOccurs="0" />
-          <!-- Document description -->
-          <element name="Description" type ="string" minOccurs="0" />
-          <!-- Document owner -->
-          <element name="Owner" type ="bc:ActorBase_13" minOccurs="0" />
-          <!-- Id of service defining the content -->
-          <element name="ServiceId" type="string" minOccurs="0" />
-          <!-- Document content -->
-          <element name="Content" type="bc:Attachment_4" minOccurs="0" /> 
-          <!-- Attachment list -->
-          <element name="AttachmentList" type="bc:ListOfAttachments_4" minOccurs="0" /> 
-          <!-- Is document followed by calling user -->
-          <element name="IsFollowed" type="boolean" minOccurs="0" />
-          <!-- Is document bookmarked by calling user -->
-          <element name="IsBookmarked" type="boolean" minOccurs="0" />
-          <!-- Share list -->
-          <element name="ShareList" type="bc:ListOfResources_13" minOccurs="0" />
-          <!-- Document size [B] -->
-          <element name="Size" type ="long" minOccurs="0" nillable="true" />
-          <!-- Parent id. If set this document is an attachment. -->
-          <element name="ParentId" type ="string" minOccurs="0" /> 
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="Document_13" type="bc:Document_13" />
-  
-  <!-- Document list resource 
-     - Version: 3.6
-     - Content types:
-       - application/vnd.marg.bcsocial.document.list-v3.6+xml 
-       - application/vnd.marg.bcsocial.document.list-v3.6+json 
-  -->
-  <complexType name="ListOfDocuments_13">
-    <sequence>
-      <element name="Document" type="bc:Document_13" minOccurs="1" maxOccurs="unbounded"/>
-    </sequence>
-  </complexType>
-  <element name="ListOfDocuments_13" type="bc:ListOfDocuments_13"/>
-  
+    
   <!-- Document resource
      - Version: 4.0
      - Content types:
@@ -531,20 +474,6 @@
   </complexType>
   <element name="Document_18" type="bc:Document_18" />
     
-  <!-- Document list resource with paging 
-     - Version: 3.6
-     - Content types:
-       - application/vnd.marg.bcsocial.document.list.page-v3.6+xml 
-       - application/vnd.marg.bcsocial.document.list.page-v3.6+json 
-  -->
-  <complexType name="ListOfDocumentsPage_13">
-    <sequence>
-      <element name="Documents" type="bc:ListOfDocuments_13" minOccurs="1" />
-      <element name="Paging" type="bc:Paging_13" minOccurs="0" />
-    </sequence>
-  </complexType>
-  <element name="ListOfDocumentsPage_13" type="bc:ListOfDocumentsPage_13" />
-
   <!-- Share list for document.
      - Version: 4.0
      - Content types:
