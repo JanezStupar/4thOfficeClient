@@ -924,78 +924,7 @@
     </sequence>
   </complexType>
   <element name="SearchResource_18" type="bc:SearchResource_18"/>
-  
-  <!-- Page of grouped search results. 
-     - Version: 5.3
-     - Content types:
-      - application/4thoffice.search.results.grouped.page-5.3+xml
-      - application/4thoffice.search.results.grouped.page-5.3+json
-      -->
-  <complexType name="SearchResultsGroupedPage_17">
-    <sequence>
-      <element name="Groups" type="bc:ListOfSearchGroups_17" minOccurs="1" />
-      <element name="Paging" type="bc:Paging_13" minOccurs="1" />
-    </sequence>
-  </complexType>
-  <element name="SearchResultsGroupedPage_17" type="bc:SearchResultsGroupedPage_17"/>
-
-  <complexType name="ListOfSearchGroups_17">
-    <sequence>
-      <element name="Group" type="bc:SearchGroup_17" minOccurs="1" maxOccurs="unbounded"/>
-    </sequence>
-  </complexType>
-  <element name="ListOfSearchGroups_17" type="bc:ListOfSearchGroups_17"/>
-  
-  <!-- Group of search results. 
-     - Version: 5.3
-     - Content types:
-      - application/4thoffice.search.group-5.3+xml
-      - application/4thoffice.search.group-5.3+json
-  -->
-  <complexType name ="SearchGroup_17">
-    <complexContent>
-      <extension base="bc:SearchGroupBase_14">
-        <sequence>
-          <element name="Results" type="bc:ListOfSearchResourcesPage_17" minOccurs="1" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="SearchGroup_17" type="bc:SearchGroup_17"/>
-  
-  <complexType name ="SearchGroupBase_14">
-    <sequence>
-      <element name="Id" type="string" minOccurs="1" />
-	    <element name="Name" type="string" minOccurs="1" />
-    </sequence>
-  </complexType>
-  <element name="SearchGroupBase_14" type="bc:SearchGroupBase_14"/>
-
-  
-  <complexType name="ListOfSearchResources_17">
-    <sequence>
-      <element name="SearchResource" type="bc:SearchResource_17" minOccurs="1" maxOccurs="unbounded"/>
-    </sequence>
-  </complexType>
-  <element name="ListOfSearchResources_17" type="bc:ListOfSearchResources_17"/>
-  
-  <complexType name="ListOfSearchResourcesPage_17">
-    <sequence>
-      <element name="SearchResourceList" type="bc:ListOfSearchResources_17" minOccurs="1" />
-      <element name="Paging" type="bc:Paging_13" minOccurs="1" />
-    </sequence>
-  </complexType>
-  <element name="ListOfSearchResourcesPage_17" type="bc:ListOfSearchResourcesPage_17" />
-  
-  <complexType name ="SearchResource_17">
-    <sequence>
-      <element name="Resource" type="bc:ResourceBase_13" minOccurs="1" />
-      <element name="Highlights" type="bc:ListOfStrings" minOccurs="0" />
-      <element name="SearchHit" type="string" minOccurs="0" />
-    </sequence>
-  </complexType>
-  <element name="SearchResource_17" type="bc:SearchResource_17"/>
-    
+      
   <!--======================================================================-->
   <!--== Device ============================================================-->
     
@@ -1099,8 +1028,6 @@
           <element name="RegionCode" type="string" minOccurs="0" />
           <!-- Time zone id. -->
            <element name="TimeZoneId" type="string" minOccurs="0" />
-           <!-- Notification sound settings. -->
-           <!--<element name="NotificationSoundSettings" type="bc:NotificationSoundSettings_14" minOccurs="0" />-->
           <!-- Chat id -->
           <element name="ChatId" type="string" minOccurs="0" />
           <!-- Authentication list. -->
@@ -1718,7 +1645,139 @@
     </sequence>
     </complexType>
   <element name="Feed_18" type="bc:Feed_18" />
+  
+  <!--======================================================================-->
+  <!--== Discussion ========================================================-->
 
+   <complexType name="ListOfDiscussionsPage_22">
+    <sequence>
+      <element name="DiscussionList" type="bc:ListOfDiscussions_22" minOccurs="1" />
+      <element name="Paging" type="bc:Paging_13" minOccurs="1" />
+    </sequence>
+  </complexType>
+  <element name="ListOfDiscussionsPage_22" type="bc:ListOfDiscussionsPage_22" />
+  
+  <complexType name="ListOfDiscussions_22">
+    <sequence>
+      <element name="Discussion" type="bc:DiscussionBase_22" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="ListOfDiscussions_22" type="bc:ListOfDiscussions_22"/>
+  
+  <complexType name="ListOfDiscussionCards_22">
+    <sequence>
+      <element name="Discussion" type="bc:DiscussionCard_22" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="ListOfDiscussionCards_22" type="bc:ListOfDiscussionCards_22"/>
+
+  <!-- Discussion.
+     - Version: 5.18
+     - Content types:
+       - application/vnd.4thoffice.discussion-v5.18+xml 
+       - application/vnd.4thoffice.discussion-v5.18+json
+       -->
+  <complexType name ="DiscussionBase_22">
+    <complexContent>
+      <extension base="bc:ResourceBase_13">
+        <sequence>
+          <element name="Parent" type="bc:StreamBase_22" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="DiscussionBase_22" type="bc:DiscussionBase_22" />
+
+  <!-- Discussion card.
+     - Version: 5.18
+     - Content types:
+       - application/vnd.4thoffice.discussion.card-v5.18+xml 
+       - application/vnd.4thoffice.discussion.card-v5.18+json
+       -->
+  <complexType name ="DiscussionCard_22">
+    <complexContent>
+      <extension base="bc:DiscussionBase_22">
+        <sequence>
+          <!--Page of posts on that discussion card.-->
+          <element name="PostListPage" type="bc:ListOfPostsPage_20" minOccurs="0" />
+          <!--Number of additional (not included in current page) unread items.-->
+          <element name="MoreUnreadCount" type="int" minOccurs="0" nillable="true"/>
+          <!--Number of all unread items.-->
+          <element name="TotalUnreadCount" type="int" minOccurs="0" nillable="true"/>
+          <element name="FirstPost" type="bc:Post_20" minOccurs="0" />
+          <element name="PreviousPost" type="bc:Post_20" minOccurs="0" />
+          <!-- Date and time when discussion card was created. -->
+          <element name="Created" type="dateTime" minOccurs="0" nillable="true" />
+          <!-- Date and time when discussion card was modified (e.g.: new reply posted, etc) -->
+          <element name="Modified" type="dateTime" minOccurs="0" nillable="true" />
+          <element name="ShareList" type="bc:ListOfResources_13" minOccurs="0" />
+          <element name="VisibilityListCount" type ="int" minOccurs="0" nillable="true" />
+          <!--<element name="VisibilityListNonGroupMembers" type="bc:ListOfUsers_14" minOccurs="0" />-->
+          <element name="PinnedToList" type = "bc:ListOfBoards_20" minOccurs="0" />
+          <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
+          <element name="Author" type="bc:User_14" minOccurs="0" />
+          <!-- Flag indicating if a post has beed managed by assistant. -->
+          <element name="ManagedByAssistant" type ="boolean" minOccurs="0" nillable="true" />
+          <element name="RelatedCardCount" type ="int" minOccurs="0" nillable="true" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="DiscussionCard_22" type="bc:DiscussionCard_22" />
+
+  <!-- Discussion chat.
+     - Version: 5.18
+     - Content types:
+       - application/vnd.4thoffice.discussion.card.chat-v5.18+xml 
+       - application/vnd.4thoffice.discussion.card.chat-v5.18+json
+       -->
+  <complexType name ="DiscussionCardChat_22">
+    <complexContent>
+      <extension base="bc:DiscussionBase_22">
+        <sequence>
+          <!--Page of posts on that chat card.-->
+          <element name="PostListPage" type="bc:ListOfPostsPage_20" minOccurs="0" />
+          <!--Number of additional (not included in current page) unread items.-->
+          <element name="MoreUnreadCount" type="int" minOccurs="0" nillable="true"/>
+          <!--Number of all unread items.-->
+          <element name="TotalUnreadCount" type="int" minOccurs="0" nillable="true"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="DiscussionCardChat_22" type="bc:DiscussionCardChat_22" /> 
+  
+  <!-- Combined discussion card.
+     - Version: 5.18
+     - Content types:
+       - application/vnd.4thoffice.discussion.card.combined-v5.18+xml 
+       - application/vnd.4thoffice.discussion.card.combined-v5.18+json
+       -->
+  <complexType name ="DiscussionCardCombined_22">
+    <complexContent>
+      <extension base="bc:DiscussionBase_22">
+        <sequence>
+          <!--Page of posts aggregated from related discussion cards.-->
+          <element name="PostListPage" type="bc:ListOfDiscussionCards_22" minOccurs="0" />
+          <!--Aggregate list of related discussion cards.-->
+          <element name="RelatedDiscussionList" type="bc:ListOfDiscussions_20" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="DiscussionCardCombined_22" type="bc:DiscussionCardCombined_22" /> 
+ 
+  <complexType name ="DiscussionSeparator_22">
+    <complexContent>
+      <extension base="bc:DiscussionBase_22">
+        <sequence>
+          <element name="Modified" type="dateTime" minOccurs="0" nillable="true" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="DiscussionSeparator_22" type="bc:DiscussionSeparator_22" />
+  
    <complexType name="ListOfDiscussionsPage_20">
     <sequence>
       <element name="DiscussionList" type="bc:ListOfDiscussions_20" minOccurs="1" />
@@ -1727,14 +1786,6 @@
   </complexType>
   <element name="ListOfDiscussionsPage_20" type="bc:ListOfDiscussionsPage_20" />
   
-   <complexType name="ListOfDiscussionsPage_18">
-    <sequence>
-      <element name="DiscussionList" type="bc:ListOfDiscussions_18" minOccurs="1" />
-      <element name="Paging" type="bc:Paging_13" minOccurs="1" />
-    </sequence>
-  </complexType>
-  <element name="ListOfDiscussionsPage_18" type="bc:ListOfDiscussionsPage_18" />
-
   <complexType name="ListOfDiscussions_20">
     <sequence>
       <element name="Discussion" type="bc:DiscussionBase_20" minOccurs="0" maxOccurs="unbounded"/>
@@ -1742,13 +1793,6 @@
   </complexType>
   <element name="ListOfDiscussions_20" type="bc:ListOfDiscussions_20"/>
   
-  <complexType name="ListOfDiscussions_18">
-    <sequence>
-      <element name="Discussion" type="bc:DiscussionBase_18" minOccurs="0" maxOccurs="unbounded"/>
-    </sequence>
-  </complexType>
-  <element name="ListOfDiscussions_18" type="bc:ListOfDiscussions_18"/>
-
   <complexType name ="DiscussionBase_20">
     <complexContent>
       <extension base="bc:ResourceBase_13">
@@ -1760,17 +1804,6 @@
   </complexType>
   <element name="DiscussionBase_20" type="bc:DiscussionBase_20" />
   
-  <complexType name ="DiscussionBase_18">
-    <complexContent>
-      <extension base="bc:ResourceBase_13">
-        <sequence>
-          <element name="Parent" type="bc:StreamBase_17" minOccurs="0" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="DiscussionBase_18" type="bc:DiscussionBase_18" />
-
   <complexType name ="DiscussionCardCombined_20">
     <complexContent>
       <extension base="bc:DiscussionBase_20">
@@ -1814,55 +1847,17 @@
     </complexContent>
   </complexType>
   <element name="DiscussionCard_20" type="bc:DiscussionCard_20" />
-     
-  <complexType name ="DiscussionCard_18">
-    <complexContent>
-      <extension base="bc:DiscussionBase_18">
-        <sequence>
-          <element name="DiscussionItemListPage" type="bc:ListOfDiscussionActivityItemsPage_18" minOccurs="0" />
-          <element name="FirstPost" type="bc:DiscussionActivityItemPost_18" minOccurs="0" />
-          <element name="PreviousPost" type="bc:Post_18" minOccurs="0" />
-          <!-- Date and time when discussion card was created. -->
-          <element name="Created" type="dateTime" minOccurs="0" nillable="true" />
-          <!-- Date and time when discussion card was modified (e.g.: new reply posted, etc) -->
-          <element name="Modified" type="dateTime" minOccurs="0" nillable="true" />
-          <element name="ShareList" type ="bc:ListOfResources_13" minOccurs="0" />
-          <element name="VisibilityListCount" type ="int" minOccurs="0" nillable="true" />
-          <element name="VisibilityListNonGroupMembers" type="bc:ListOfUsers_14" minOccurs="0" />
-          <element name="PinnedToList" type ="bc:ListOfBoards_15" minOccurs="0" />
-          <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
-          <element name="Author" type="bc:User_14" minOccurs="0" />
-          <!-- Flag indicating if a post has beed managed by assistant. -->
-          <element name="ManagedByAssistant" type ="boolean" minOccurs="0" nillable="true" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="DiscussionCard_18" type="bc:DiscussionCard_18" />
- 
+      
   <complexType name ="DiscussionChat_20">
     <complexContent>
       <extension base="bc:DiscussionBase_20">
         <sequence>
           <element name="Post" type="bc:Post_20" minOccurs="0" />
-          <!--<element name="Unread" type ="boolean" minOccurs="0" nillable="true" />-->
         </sequence>
       </extension>
     </complexContent>
   </complexType>
   <element name="DiscussionChat_20" type="bc:DiscussionChat_20" />
-
-  <complexType name ="DiscussionChat_18">
-    <complexContent>
-      <extension base="bc:DiscussionBase_18">
-        <sequence>
-          <element name="Post" type="bc:Post_18" minOccurs="0" />
-          <element name="Unread" type ="boolean" minOccurs="0" nillable="true" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="DiscussionChat_18" type="bc:DiscussionChat_18" />
  
   <complexType name ="DiscussionSeparatorBase_20">
     <complexContent>
@@ -1894,8 +1889,71 @@
     </complexContent>
   </complexType>
   <element name="DiscussionCardSeparator_20" type="bc:DiscussionCardSeparator_20" />
+
+  <complexType name="ListOfDiscussionsPage_18">
+    <sequence>
+      <element name="DiscussionList" type="bc:ListOfDiscussions_18" minOccurs="1" />
+      <element name="Paging" type="bc:Paging_13" minOccurs="1" />
+    </sequence>
+  </complexType>
+  <element name="ListOfDiscussionsPage_18" type="bc:ListOfDiscussionsPage_18" />
   
- <!-- Unread separator for discussions.
+  <complexType name="ListOfDiscussions_18">
+    <sequence>
+      <element name="Discussion" type="bc:DiscussionBase_18" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="ListOfDiscussions_18" type="bc:ListOfDiscussions_18"/>
+
+  <complexType name ="DiscussionBase_18">
+    <complexContent>
+      <extension base="bc:ResourceBase_13">
+        <sequence>
+          <element name="Parent" type="bc:StreamBase_17" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="DiscussionBase_18" type="bc:DiscussionBase_18" />
+
+  <complexType name ="DiscussionCard_18">
+    <complexContent>
+      <extension base="bc:DiscussionBase_18">
+        <sequence>
+          <element name="DiscussionItemListPage" type="bc:ListOfDiscussionActivityItemsPage_18" minOccurs="0" />
+          <element name="FirstPost" type="bc:DiscussionActivityItemPost_18" minOccurs="0" />
+          <element name="PreviousPost" type="bc:Post_18" minOccurs="0" />
+          <!-- Date and time when discussion card was created. -->
+          <element name="Created" type="dateTime" minOccurs="0" nillable="true" />
+          <!-- Date and time when discussion card was modified (e.g.: new reply posted, etc) -->
+          <element name="Modified" type="dateTime" minOccurs="0" nillable="true" />
+          <element name="ShareList" type ="bc:ListOfResources_13" minOccurs="0" />
+          <element name="VisibilityListCount" type ="int" minOccurs="0" nillable="true" />
+          <element name="VisibilityListNonGroupMembers" type="bc:ListOfUsers_14" minOccurs="0" />
+          <element name="PinnedToList" type ="bc:ListOfBoards_15" minOccurs="0" />
+          <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
+          <element name="Author" type="bc:User_14" minOccurs="0" />
+          <!-- Flag indicating if a post has beed managed by assistant. -->
+          <element name="ManagedByAssistant" type ="boolean" minOccurs="0" nillable="true" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="DiscussionCard_18" type="bc:DiscussionCard_18" />
+
+  <complexType name ="DiscussionChat_18">
+    <complexContent>
+      <extension base="bc:DiscussionBase_18">
+        <sequence>
+          <element name="Post" type="bc:Post_18" minOccurs="0" />
+          <element name="Unread" type ="boolean" minOccurs="0" nillable="true" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="DiscussionChat_18" type="bc:DiscussionChat_18" />
+
+  <!-- Unread separator for discussions.
      - Version: 5.8
      - Content types:
        - application/vnd.4thoffice.discussion.separator.unread-v5.8+xml
@@ -1958,6 +2016,75 @@
   <!--======================================================================-->
   <!--== Post ==============================================================-->
 
+  <complexType name="ListOfPostsPage_22">
+    <sequence>
+      <element name="Posts" type="bc:ListOfPosts_20" minOccurs="1" />
+      <element name="Paging" type="bc:Paging_13" minOccurs="1" />
+    </sequence>
+  </complexType>
+  <element name="ListOfPostsPage_22" type="bc:ListOfPostsPage_22" />
+    
+  <complexType name="ListOfPosts_22">
+    <sequence>
+      <element name="Post" type="bc:Post_22" minOccurs="1" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="ListOfPosts_22" type="bc:ListOfPosts_22"/>
+  
+  <!-- Post resource.
+     - Version: 5.18
+     - Content types:
+       - application/vnd.4thoffice.post-v5.18+xml 
+       - application/vnd.4thoffice.post-v5.18+json
+       -->
+  <complexType name="Post_22">
+    <complexContent>
+      <extension base="bc:ResourceBase_13">
+        <sequence>
+          <element name="Created" type="dateTime" minOccurs="0" nillable="true" />
+          <element name="Text" type ="string" minOccurs="0" />
+          <element name="ShareList" type ="bc:ListOfResources_13" minOccurs="0" />
+          <element name="VisibilityListCount" type ="int" minOccurs="0" nillable="true" />
+          <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
+          <element name="Author" type="bc:User_14" minOccurs="0" />
+          <element name="Parent" type ="bc:DiscussionBase_22" minOccurs="0" />
+
+          <element name="Unread" type ="boolean" minOccurs="0" nillable="true" />
+          <!-- Date time when unread flag was cleared by post recipient. -->
+          <element name="UnreadClearedAt" type ="dateTime" minOccurs="0" nillable="true" />
+
+          <element name="ImportedViaEmail" type ="boolean" minOccurs="0" nillable="true" />
+          <element name="ForwardedCopy" type="boolean" minOccurs="0" nillable="true" />
+          <element name="ErrorSending" type ="boolean" minOccurs="0" nillable="true" />
+          
+          <element name="BodyFormat" type="bc:BodyFormat_18" minOccurs="0" />
+          <element name="BodyHtml" type="string" minOccurs="0" />
+          <element name="BodySnippet" type="string" minOccurs="0" />
+          
+          <!-- Flag indicating if a post has beed managed by assistant. -->
+          <element name="ManagedByAssistant" type ="boolean" minOccurs="0" nillable="true" />
+          <element name="ReminderType" type ="string" minOccurs="0" />
+
+          <!-- Resource id generated by client-side and used at create time. 
+               Required for double-post prevention on server-side. -->
+          <element name="ClientResourceId" type="string" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="Post_22" type="bc:Post_22" />
+
+  <complexType name ="PostSeparator_22">
+    <complexContent>
+      <extension base="bc:ResourceBase_13">
+        <sequence>
+          <element name="Modified" type="dateTime" minOccurs="0" nillable="true" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="PostSeparator_22" type="bc:PostSeparator_22" /> 
+
   <complexType name="ListOfPostsPage_20">
     <sequence>
       <element name="Posts" type="bc:ListOfPosts_20" minOccurs="1" />
@@ -2015,32 +2142,6 @@
     </complexContent>
   </complexType>
   <element name="Post_20" type="bc:Post_20" />
-
-  <!-- Pinned-to list for post.
-     - Version: 5.17
-     - Content types:
-       - application/vnd.4thoffice.post.pinnedto.list-v5.17+xml 
-       - application/vnd.4thoffice.post.pinnedto.list-v5.17+json
-    -->
-  <complexType name ="PostPinnedToList_21">
-    <sequence>
-      <element name="BoardList" type ="bc:ListOfBoards_21" minOccurs="1" />
-    </sequence>
-  </complexType>
-  <element name="PostPinnedToList_21" type="bc:PostPinnedToList_21"/>
-  
-  <!-- Pinned-to list for post.
-     - Version: 5.15
-     - Content types:
-       - application/vnd.4thoffice.post.pinnedto.list-v5.15+xml 
-       - application/vnd.4thoffice.post.pinnedto.list-v5.15+json
-    -->
-  <complexType name ="PostPinnedToList_20">
-    <sequence>
-      <element name="BoardList" type ="bc:ListOfBoards_20" minOccurs="1" />
-    </sequence>
-  </complexType>
-  <element name="PostPinnedToList_20" type="bc:PostPinnedToList_20"/>
   
   <!-- Post resource.
      - Version: 5.8
@@ -2074,6 +2175,26 @@
     </complexContent>
   </complexType>
   <element name="Post_18" type="bc:Post_18" />
+      
+  <!--======================================================================-->
+  <!--== Post preview ======================================================-->
+
+  <!-- Post preview resource.
+     - Version: 5.15
+     - Content types:
+       - application/vnd.4thoffice.post.preview-v5.15+xml 
+       - application/vnd.4thoffice.post.preview-v5.15+json
+       -->
+  <complexType name="PostPreview_20">
+    <sequence>
+      <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
+      <element name="BodyHtml" type="string" minOccurs="0" />
+    </sequence>
+  </complexType>
+  <element name="PostPreview_20" type="bc:PostPreview_20" />
+
+  <!--======================================================================-->
+  <!--== Post flags ========================================================-->
   
   <!-- Managed by assistant flag for post resource.
      - Version: 5.15
@@ -2092,78 +2213,35 @@
     </complexContent>
   </complexType>
   <element name="PostFlagManagedByAssistant_20" type="bc:PostFlagManagedByAssistant_20"/>
-  
-  <!-- Post resource.
-     - Version: 5.3
-     - Content types:
-       - application/vnd.4thoffice.post-v5.3+xml 
-       - application/vnd.4thoffice.post-v5.3+json
-       -->
-  <complexType name="Post_17">
-    <complexContent>
-      <extension base="bc:ResourceBase_13">
-        <sequence>
-          <!-- Created date and time-->
-          <element name="Created" type="dateTime" minOccurs="0" nillable="true" />
-          <!-- Post text. -->
-          <element name="Text" type ="string" minOccurs="0" />
-          <element name="ShareList" type ="bc:ListOfResources_13" minOccurs="0" />
-          <element name="VisibilityListCount" type ="int" minOccurs="0" nillable="true" />
-          <!-- Parent id (optional). If set, reply in parent thread is created. -->
-          <element name="ParentId" type ="string" minOccurs="0" />
-          <!-- Attached files. -->
-          <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
-          <element name="Author" type="bc:User_14" minOccurs="0" />
-          <element name="Stream" type ="bc:StreamBase_17" minOccurs="0" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="Post_17" type="bc:Post_17" />
-  
-  <!-- Post resource.
-     - Version: 5.0
-     - Content types:
-       - application/vnd.4thoffice.post-v5.0+xml 
-       - application/vnd.4thoffice.post-v5.0+json
-    -->
-  <complexType name="Post_15">
-    <complexContent>
-      <extension base="bc:ResourceBase_13">
-        <sequence>
-          <!-- Created date and time-->
-          <element name="Created" type="dateTime" minOccurs="0" nillable="true" />
-          <!-- Post text. -->
-          <element name="Text" type ="string" minOccurs="0" />
-          <element name="ShareList" type ="bc:ListOfResources_13" minOccurs="0" />
-          <!-- Parent id (optional). If set, reply to parent post is created. -->
-          <element name="ParentId" type ="string" minOccurs="0" />
-          <!-- Attached files. -->
-          <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
-          <element name="Author" type="bc:User_14" minOccurs="0" />
-          <element name="StreamId" type ="string" minOccurs="0" />
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="Post_15" type="bc:Post_15" />
 
   <!--======================================================================-->
-  <!--== PostPreview ==============================================================-->
-
-  <!-- Post preview resource.
-     - Version: 5.15
+  <!--== Post pinned-to list ===============================================-->
+  
+  <!-- Pinned-to list for post.
+     - Version: 5.17
      - Content types:
-       - application/vnd.4thoffice.post.preview-v5.15+xml 
-       - application/vnd.4thoffice.post.preview-v5.15+json
-       -->
-  <complexType name="PostPreview_20">
+       - application/vnd.4thoffice.post.pinnedto.list-v5.17+xml 
+       - application/vnd.4thoffice.post.pinnedto.list-v5.17+json
+    -->
+  <complexType name ="PostPinnedToList_21">
     <sequence>
-      <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
-      <element name="BodyHtml" type="string" minOccurs="0" />
+      <element name="BoardList" type ="bc:ListOfBoards_21" minOccurs="1" />
     </sequence>
   </complexType>
-  <element name="PostPreview_20" type="bc:PostPreview_20" />
+  <element name="PostPinnedToList_21" type="bc:PostPinnedToList_21"/>
+
+  <!-- Pinned-to list for post.
+     - Version: 5.15
+     - Content types:
+       - application/vnd.4thoffice.post.pinnedto.list-v5.15+xml 
+       - application/vnd.4thoffice.post.pinnedto.list-v5.15+json
+    -->
+  <complexType name ="PostPinnedToList_20">
+    <sequence>
+      <element name="BoardList" type ="bc:ListOfBoards_20" minOccurs="1" />
+    </sequence>
+  </complexType>
+  <element name="PostPinnedToList_20" type="bc:PostPinnedToList_20"/> 
       
   <!--======================================================================-->
   <!--== Invite =======================================================-->
@@ -2240,19 +2318,21 @@
   <!--== Appointment =======================================================-->
 
   <!-- Appointment
-     - Version: 5.15
+     - Version: 5.18
      - Content types:
-       - application/vnd.4thoffice-appointment-v5.15+xml
-       - application/vnd.4thoffice-appointment-v5.15+json
+       - application/vnd.4thoffice-appointment-v5.18+xml
+       - application/vnd.4thoffice-appointment-v5.18+json
   -->
-  <complexType name="Appointment_20">
+  <complexType name="Appointment_22">
     <complexContent>
-      <extension base="bc:Post_20">
+      <extension base="bc:Post_22">
         <sequence>
           <element name="CalendarUId" type="string" minOccurs="0" />
           <element name="AppointmentTime" type="bc:AppointmentTime_20" minOccurs="1" />
           <element name="Location" type="string" minOccurs="0" />
           <element name="LocationImage" type="string" minOccurs="0" />
+          <element name="LocationLat" type="string" minOccurs="0" />
+          <element name="LocationLng" type="string" minOccurs="0" />
           <element name="Attendees" type="bc:ListOfAttendees_20" minOccurs="0" />
           <element name="Recurrence" type="bc:ListOfAppointmentRecurrence_20" minOccurs="0" />
           <element name="Reminder" type="bc:ListAppointmentReminders_20" minOccurs="0" />
@@ -2260,8 +2340,8 @@
       </extension>
     </complexContent>
   </complexType>
-  <element name="Appointment_20" type="bc:Appointment_20"/>
-
+  <element name="Appointment_22" type="bc:Appointment_22"/>
+  
   <complexType name="AppointmentListPage_20">
     <sequence>
       <element name="AppointmentList" type="bc:ListOfAppointment_20" minOccurs="1" />
@@ -2276,6 +2356,31 @@
     </sequence>
   </complexType>
   <element name="ListOfAppointment_20" type="bc:ListOfAppointment_20"/>
+  
+  <!-- Appointment
+     - Version: 5.15
+     - Content types:
+       - application/vnd.4thoffice-appointment-v5.15+xml
+       - application/vnd.4thoffice-appointment-v5.15+json
+  -->
+  <complexType name="Appointment_20">
+    <complexContent>
+      <extension base="bc:Post_20">
+        <sequence>
+          <element name="CalendarUId" type="string" minOccurs="0" />
+          <element name="AppointmentTime" type="bc:AppointmentTime_20" minOccurs="1" />
+          <element name="Location" type="string" minOccurs="0" />
+          <element name="LocationImage" type="string" minOccurs="0" />
+          <element name="LocationLat" type="string" minOccurs="0" />
+          <element name="LocationLng" type="string" minOccurs="0" />
+          <element name="Attendees" type="bc:ListOfAttendees_20" minOccurs="0" />
+          <element name="Recurrence" type="bc:ListOfAppointmentRecurrence_20" minOccurs="0" />
+          <element name="Reminder" type="bc:ListAppointmentReminders_20" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="Appointment_20" type="bc:Appointment_20"/>
 
   <complexType name="AppointmentResponse_20">
     <sequence>
@@ -2513,10 +2618,90 @@
     </sequence>
   </complexType>
   <element name="ActivityItem_13" type="bc:ActivityItem_13"/>
-
+    
   <!--======================================================================-->
-  <!--== Sort direction ====================================================-->
+  <!--== Sort ==============================================================-->
+
+  <!-- Sort action -->
+  <complexType name ="SortActionBase_13">
+    <complexContent>
+      <extension base="bc:ResourceBase_13">
+        <sequence>
+          <element name="DirectionHint" type="bc:SortDirectionHint_13" minOccurs="1" />
+          <element name="DefaultDirection" type="bc:SortDirection" minOccurs="1" />
+          <!--Set when this sort action is selected.-->
+          <element name="IsSelected" type="bc:SelectedSortAction_13" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="SortActionBase_13" type="bc:SortActionBase_13"/>
   
+  <complexType name="SelectedSortAction_13">
+    <sequence>
+      <element name="Direction" type="bc:SortDirection" minOccurs="1" />
+    </sequence>
+  </complexType>
+  <element name="SelectedSortAction_13" type="bc:SelectedSortAction_13"/>
+
+  <complexType name="ListOfSortActions_13">
+    <sequence>
+      <element name="SortAction" type="bc:SortActionBase_13" minOccurs="1" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="ListOfSortActions_13" type="bc:ListOfSortActions_13"/>
+  
+  <complexType name ="SortActionByName_13">
+    <complexContent>
+      <extension base="bc:SortActionBase_13">
+        <sequence>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="SortActionByName_13" type="bc:SortActionByName_13"/>
+  
+    <complexType name ="SortActionByCreatedDate_13">
+    <complexContent>
+      <extension base="bc:SortActionBase_13">
+        <sequence>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="SortActionByCreatedDate_13" type="bc:SortActionByCreatedDate_13"/>
+  
+  <complexType name ="SortActionByModifiedDate_13">
+    <complexContent>
+      <extension base="bc:SortActionBase_13">
+        <sequence>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="SortActionByModifiedDate_13" type="bc:SortActionByModifiedDate_13"/>
+  
+  <complexType name ="SortActionByStatus_13">
+    <complexContent>
+      <extension base="bc:SortActionBase_13">
+        <sequence>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="SortActionByStatus_13" type="bc:SortActionByStatus_13"/>
+  
+  <complexType name ="SortActionCustom_13">
+    <complexContent>
+      <extension base="bc:SortActionBase_13">
+        <sequence>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="SortActionCustom_13" type="bc:SortActionCustom_13"/>
+
+  <!-- Sort direction (v13) -->
   <simpleType name="SortDirection">
     <restriction base="string">
       <enumeration value="Ascending"/>
@@ -2524,18 +2709,27 @@
     </restriction>
   </simpleType>
   <element name="SortDirection" type="bc:SortDirection"/>
-
+  
+  <!-- Sort action id (v13) -->
   <simpleType name="SortActionId">
     <restriction base="string">
       <enumeration value="ByName"/>
       <enumeration value="ByCreatedDate"/>
-      <enumeration value="ByModifiedDate"/>
+      <enumeration value="ByModifiedDate"/> 
       <enumeration value="ByMostUsed"/>
       <enumeration value="ByLastEvent"/>
       <enumeration value="BySize"/>
     </restriction>
   </simpleType>
   <element name="SortActionId" type="bc:SortActionId"/>
+  
+  <complexType name = "SortDirectionHint_13">
+    <sequence>
+      <element name="Ascending" type="string" minOccurs="1" /> 
+      <element name="Descending" type="string" minOccurs="1" />
+    </sequence>
+  </complexType>
+  <element name="SortDirectionHint_13" type="bc:SortDirectionHint_13"/>
 
   <!--======================================================================-->
   <!--== Drive =============================================================-->
@@ -2549,6 +2743,8 @@
   <complexType name = "Drive_14">
     <sequence>
       <element name="DriveItemGroupList" type="bc:ListOfDriveItemGroups_14" minOccurs="0" />
+      <!--Available sort action list-->
+      <element name="AvailableSortActionList" type="bc:ListOfSortActions_13" minOccurs="0" />
     </sequence>
   </complexType>
   <element name="Drive_14" type="bc:Drive_14"/>
@@ -3483,7 +3679,101 @@
   
   <!--======================================================================-->
   <!--== Stream ============================================================-->
-   
+
+  <complexType name="ListOfStreamsPage_22">
+    <sequence>
+      <element name="StreamList" type="bc:ListOfStreams_22" minOccurs="1" />
+      <element name="Paging" type="bc:Paging_13" minOccurs="1" />
+    </sequence>
+  </complexType>
+  <element name="ListOfStreamsPage_22" type="bc:ListOfStreamsPage_22" />
+
+  <complexType name="ListOfStreams_22">
+    <sequence>
+      <element name="Discussion" type="bc:StreamBase_22" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="ListOfStreams_22" type="bc:ListOfStreams_22"/>
+  
+  <!-- Stream base.
+     - Version: 5.3
+     - Content types:
+       - application/vnd.4thoffice.stream-5.18+xml
+       - application/vnd.4thoffice.stream-5.18+json
+       -->
+  <complexType name ="StreamBase_22">
+    <complexContent>
+      <extension base="bc:ResourceBase_13">
+        <sequence>
+          <element name="IsVisible" type ="boolean" minOccurs="0" nillable="true" />
+          <!--Last post.-->
+          <element name="LastPost" type ="bc:Post_22" minOccurs="0" />
+          <!--Last unread post.-->
+          <element name="LastUnreadPost" type ="bc:Post_22" minOccurs="0" />
+          <element name="DiscussionListPage" type="bc:ListOfDiscussionsPage_22" minOccurs="0" />
+          <!--First unread post.-->
+          <!--<element name="OldestUnreadPost" type ="bc:Post_22" minOccurs="0" />-->
+          <!--Cumulative badge count.-->
+          <element name="BadgeCount" type="integer" minOccurs="0" nillable="true" />
+          <!--Badge count for card stream.-->
+          <element name="BadgeCountCardStream" type="integer" minOccurs="0" nillable="true" />
+          <!--Badge count for chat stream.-->
+          <element name="BadgeCountChatStream" type="integer" minOccurs="0" nillable="true" />
+          <!-- Indicates date time of the latest change on that stream item. -->
+          <element name="Modified" type="dateTime" minOccurs="0" nillable="true" />
+          <!-- Indicates date time of the latest change on nested discussion/post resource. -->
+          <element name="SortModified" type="dateTime" minOccurs="0" nillable="true" />
+          <element name="Parent" type="bc:Menu_22" minOccurs="0" nillable="true" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="StreamBase_22" type="bc:StreamBase_22"/>
+  
+   <!-- User stream.
+     - Version: 5.18
+     - Content types:
+       - application/vnd.4thoffice.stream.user-5.18+xml
+       - application/vnd.4thoffice.stream.user-5.18+json
+       -->
+  <complexType name ="StreamUser_22">
+    <complexContent>
+      <extension base="bc:StreamBase_22">
+        <sequence>
+          <element name="User" type ="bc:User_14" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="StreamUser_22" type="bc:StreamUser_22"/>
+  
+  <!-- Group stream.
+     - Version: 5.3
+     - Content types:
+       - application/vnd.4thoffice.stream.group-5.18+xml
+       - application/vnd.4thoffice.stream.group-5.18+json
+       -->
+  <complexType name ="StreamGroup_22">
+    <complexContent>
+      <extension base="bc:StreamBase_22">
+        <sequence>
+          <element name="Description" type ="string" minOccurs="0" />
+          <element name="MemberInfo" type ="bc:GroupMemberInfo_22" minOccurs="0" />
+          <element name="AdministratorInfo" type ="bc:GroupMemberInfo_22" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="StreamGroup_22" type="bc:StreamGroup_22"/>
+
+  <complexType name ="GroupMemberInfo_22">
+    <sequence>
+      <element name="Count" type="integer" minOccurs="0" nillable="true" />
+      <element name="Users" type ="bc:ListOfUsers_14" minOccurs="0" />
+    </sequence>
+  </complexType>
+  <element name="GroupMemberInfo_22" type="bc:GroupMemberInfo_22"/> 
+  
   <!-- User stream resource 
      - Version: 5.3
      - Content types:
@@ -3546,6 +3836,22 @@
   </simpleType>
   <element name="MenuScope" type="bc:MenuScope" />
 
+  <!-- Menu resource.
+     - Version: 5.18
+     - Content types:
+       - application/vnd.4thoffice.menu-v5.18+xml 
+       - application/vnd.4thoffice.menu-v5.18+json
+       -->
+  <complexType name="Menu_22">
+    <sequence>
+      <element name="StreamListPage" type="bc:ListOfStreamsPage_22" minOccurs="1" />
+      <!--Total count of unread items.-->
+      <element name="BadgeCountTotal" type="int" minOccurs="0" nillable="true"/>
+      <element name="HasUnreadItems" type="boolean" minOccurs="0" nillable="true"/>
+    </sequence>
+  </complexType>
+  <element name="Menu_22" type="bc:Menu_22" />
+  
   <!-- Menu resource.
      - Version: 5.17
      - Content types:
@@ -3647,68 +3953,7 @@
     </sequence>
   </complexType>
   <element name="MenuItem_20" type="bc:MenuItem_20"/>
-   
-  <!-- Menu resource.
-     - Version: 5.12
-     - Content types:
-       - application/vnd.4thoffice.menu-v5.12+xml 
-       - application/vnd.4thoffice.menu-v5.12+json
-       -->
-  <complexType name="Menu_19">
-    <sequence>
-      <element name="UnreadMenuItems" type="bc:ListOfMenuItemsPage_19" minOccurs="1" />
-      <element name="RecentMenuItems" type="bc:ListOfMenuItemsPage_19" minOccurs="1" />
-      <!--Total count of unread items.-->
-      <element name="BadgeCountTotal" type="int" minOccurs="0" nillable="true"/>
-    </sequence>
-  </complexType>
-  <element name="Menu_19" type="bc:Menu_19" />
-
-  <complexType name="ListOfMenuItemsPage_19">
-    <sequence>
-      <element name="MenuItemList" type="bc:ListOfMenutItems_17" minOccurs="1" />
-      <element name="Paging" type="bc:Paging_13" minOccurs="1" />
-    </sequence>
-  </complexType>
-  <element name="ListOfMenuItemsPage_19" type="bc:ListOfMenuItemsPage_19" />
-  
-  <!-- Menu resource.
-     - Version: 5.3
-     - Content types:
-       - application/vnd.4thoffice.menu.items.list.page-v5.3+xml 
-       - application/vnd.4thoffice.menu.items.list.page-v5.3+json
-       -->
-  <complexType name="ListOfMenuItemsPage_17">
-    <sequence>
-      <element name="MenuItemList" type="bc:ListOfMenutItems_17" minOccurs="1" />
-      <element name="Paging" type="bc:Paging_13" minOccurs="1" />
-      <!--Total count of unread items.-->
-      <element name="BadgeCountTotal" type="int" minOccurs="0" nillable="true"/>
-      <element name="HasUnreadItems" type="boolean" minOccurs="0" nillable="true"/>
-    </sequence>
-  </complexType>
-  <element name="ListOfMenuItemsPage_17" type="bc:ListOfMenuItemsPage_17" />
-  
-  <complexType name="ListOfMenutItems_17">
-    <sequence>
-      <element name="MenuItem" type="bc:MenuItem_17" minOccurs="1" maxOccurs="unbounded"/>
-    </sequence>
-  </complexType>
-  <element name="ListOfMenutItems_17" type="bc:ListOfMenutItems_17"/>
-  
-  <complexType name ="MenuItem_17">
-    <sequence>
-	    <element name="Resource" type="bc:ResourceBase_13" minOccurs="0" />
-      <element name="LastPost" type ="bc:Post_17" minOccurs="0" />
-      <element name="OldestUnreadPost" type ="bc:Post_17" minOccurs="0" />
-      <element name="Modified" type="dateTime" minOccurs="0" nillable="true" />
-      <element name="BadgeCount" type="integer" minOccurs="0" nillable="true" />
-      <element name="BadgeCountCardStream" type="integer" minOccurs="0" nillable="true" />
-      <element name="BadgeCountChatStream" type="integer" minOccurs="0" nillable="true" />
-    </sequence>
-  </complexType>
-  <element name="MenuItem_17" type="bc:MenuItem_17"/>
-
+     
   <!--======================================================================-->
   <!--== Location ============================================================-->
  
