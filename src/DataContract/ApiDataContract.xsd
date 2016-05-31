@@ -109,6 +109,7 @@
       <element name="Type" type ="string" minOccurs="1" />
       <element name="Name" type ="string" minOccurs="1" />
       <element name="Description" type ="string" minOccurs="1" />
+      <element name="AvailableValues" type ="bc:ListOfStrings" minOccurs="0" />
       <element name="Required" type ="boolean" minOccurs="1" />
       <element name="IsList" type ="boolean" minOccurs="1" />
     </sequence>
@@ -1608,11 +1609,24 @@
   <element name="FeedScope" type="bc:FeedScope" />
 
   <!-- Feed resource 
+     - Version: 5.18
+     - Media types:
+       - application/vnd.4thoffice.feed-v5.18+xml
+       - application/vnd.4thoffice.feed-v5.18+json
+       -->
+  <complexType name ="Feed_22">
+    <sequence>
+      <element name="DiscussionListPage" type="bc:ListOfDiscussionsPage_22" minOccurs="1" />
+    </sequence>
+    </complexType>
+  <element name="Feed_22" type="bc:Feed_22" />
+  
+  <!-- Feed resource 
      - Version: 5.15
      - Content types:
-       - application/vnd.4thoffice.feed-v5.12+xml
-       - application/vnd.4thoffice.feed-v5.12+json
-   -->
+       - application/vnd.4thoffice.feed-v5.15+xml
+       - application/vnd.4thoffice.feed-v5.15+json
+       -->
   <complexType name ="Feed_20">
     <sequence>
       <element name="DiscussionListPage" type="bc:ListOfDiscussionsPage_20" minOccurs="1" />
@@ -1625,7 +1639,7 @@
      - Content types:
        - application/vnd.4thoffice.feed-v5.12+xml
        - application/vnd.4thoffice.feed-v5.12+json
-   -->
+       -->
   <complexType name ="Feed_19">
     <sequence>
       <element name="DiscussionListPage" type="bc:ListOfDiscussionsPage_18" minOccurs="1" />
@@ -1673,7 +1687,7 @@
 
   <!-- Discussion.
      - Version: 5.18
-     - Content types:
+     - Media types:
        - application/vnd.4thoffice.discussion-v5.18+xml 
        - application/vnd.4thoffice.discussion-v5.18+json
        -->
@@ -1690,7 +1704,7 @@
 
   <!-- Discussion card.
      - Version: 5.18
-     - Content types:
+     - Media types:
        - application/vnd.4thoffice.discussion.card-v5.18+xml 
        - application/vnd.4thoffice.discussion.card-v5.18+json
        -->
@@ -1699,13 +1713,13 @@
       <extension base="bc:DiscussionBase_22">
         <sequence>
           <!--Page of posts on that discussion card.-->
-          <element name="PostListPage" type="bc:ListOfPostsPage_20" minOccurs="0" />
+          <element name="PostListPage" type="bc:ListOfPostsPage_22" minOccurs="0" />
           <!--Number of additional (not included in current page) unread items.-->
           <element name="MoreUnreadCount" type="int" minOccurs="0" nillable="true"/>
           <!--Number of all unread items.-->
           <element name="TotalUnreadCount" type="int" minOccurs="0" nillable="true"/>
-          <element name="FirstPost" type="bc:Post_20" minOccurs="0" />
-          <element name="PreviousPost" type="bc:Post_20" minOccurs="0" />
+          <element name="FirstPost" type="bc:Post_22" minOccurs="0" />
+          <element name="PreviousPost" type="bc:Post_22" minOccurs="0" />
           <!-- Date and time when discussion card was created. -->
           <element name="Created" type="dateTime" minOccurs="0" nillable="true" />
           <!-- Date and time when discussion card was modified (e.g.: new reply posted, etc) -->
@@ -1713,7 +1727,7 @@
           <element name="ShareList" type="bc:ListOfResources_13" minOccurs="0" />
           <element name="VisibilityListCount" type ="int" minOccurs="0" nillable="true" />
           <!--<element name="VisibilityListNonGroupMembers" type="bc:ListOfUsers_14" minOccurs="0" />-->
-          <element name="PinnedToList" type = "bc:ListOfBoards_20" minOccurs="0" />
+          <element name="PinnedToList" type = "bc:ListOfBoards_22" minOccurs="0" />
           <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
           <element name="Author" type="bc:User_14" minOccurs="0" />
           <!-- Flag indicating if a post has beed managed by assistant. -->
@@ -1724,32 +1738,10 @@
     </complexContent>
   </complexType>
   <element name="DiscussionCard_22" type="bc:DiscussionCard_22" />
-
-  <!-- Discussion chat.
-     - Version: 5.18
-     - Content types:
-       - application/vnd.4thoffice.discussion.card.chat-v5.18+xml 
-       - application/vnd.4thoffice.discussion.card.chat-v5.18+json
-       -->
-  <complexType name ="DiscussionCardChat_22">
-    <complexContent>
-      <extension base="bc:DiscussionBase_22">
-        <sequence>
-          <!--Page of posts on that chat card.-->
-          <element name="PostListPage" type="bc:ListOfPostsPage_20" minOccurs="0" />
-          <!--Number of additional (not included in current page) unread items.-->
-          <element name="MoreUnreadCount" type="int" minOccurs="0" nillable="true"/>
-          <!--Number of all unread items.-->
-          <element name="TotalUnreadCount" type="int" minOccurs="0" nillable="true"/>
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="DiscussionCardChat_22" type="bc:DiscussionCardChat_22" /> 
   
   <!-- Combined discussion card.
      - Version: 5.18
-     - Content types:
+     - Media types:
        - application/vnd.4thoffice.discussion.card.combined-v5.18+xml 
        - application/vnd.4thoffice.discussion.card.combined-v5.18+json
        -->
@@ -1758,15 +1750,26 @@
       <extension base="bc:DiscussionBase_22">
         <sequence>
           <!--Page of posts aggregated from related discussion cards.-->
-          <element name="PostListPage" type="bc:ListOfDiscussionCards_22" minOccurs="0" />
+          <element name="PostListPage" type="bc:ListOfPostsPage_22" minOccurs="0" />
           <!--Aggregate list of related discussion cards.-->
-          <element name="RelatedDiscussionList" type="bc:ListOfDiscussions_20" minOccurs="0" />
+          <element name="RelatedDiscussionList" type="bc:ListOfDiscussionCards_22" minOccurs="0" />
         </sequence>
       </extension>
     </complexContent>
   </complexType>
-  <element name="DiscussionCardCombined_22" type="bc:DiscussionCardCombined_22" /> 
- 
+  <element name="DiscussionCardCombined_22" type="bc:DiscussionCardCombined_22" />
+
+  <complexType name ="DiscussionChat_22">
+    <complexContent>
+      <extension base="bc:DiscussionBase_22">
+        <sequence>
+          <element name="Post" type="bc:Post_22" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="DiscussionChat_22" type="bc:DiscussionChat_22" />
+  
   <complexType name ="DiscussionSeparator_22">
     <complexContent>
       <extension base="bc:DiscussionBase_22">
@@ -2018,7 +2021,7 @@
 
   <complexType name="ListOfPostsPage_22">
     <sequence>
-      <element name="Posts" type="bc:ListOfPosts_20" minOccurs="1" />
+      <element name="Posts" type="bc:ListOfPosts_22" minOccurs="1" />
       <element name="Paging" type="bc:Paging_13" minOccurs="1" />
     </sequence>
   </complexType>
@@ -2033,7 +2036,7 @@
   
   <!-- Post resource.
      - Version: 5.18
-     - Content types:
+     - Media types:
        - application/vnd.4thoffice.post-v5.18+xml 
        - application/vnd.4thoffice.post-v5.18+json
        -->
@@ -2964,11 +2967,56 @@
   <!--== Board ==============================================================-->
 
   <!-- Personal board.
+     - Version: 5.18
+     - Media types:
+       - application/vnd.4thoffice.board.personal-v5.18+xml 
+       - application/vnd.4thoffice.board.personal-v5.18+json
+       -->
+  <complexType name ="BoardPersonal_22">
+    <complexContent>
+      <extension base="bc:ResourceBase_13">
+        <sequence>
+          <!-- Pinned item list. -->
+          <element name="PinnedItemList" type="bc:ListOfPinnedItems_21" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="BoardPersonal_22" type="bc:BoardPersonal_22"/>
+  
+  <!-- Board list.
+     - Version: 5.18
+     - Media types:
+       - application/vnd.4thoffice.board.list-v5.18+xml 
+       - application/vnd.4thoffice.board.list-v5.18+json
+       -->
+  <complexType name="ListOfBoards_22">
+    <sequence>
+      <element name="Board" type="bc:BoardPersonal_22" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="ListOfBoards_22" type="bc:ListOfBoards_22"/>
+
+  <!-- Board list page.
+     - Version: 5.18
+     - Media types:
+       - application/vnd.4thoffice.board.list.page-v5.17+xml 
+       - application/vnd.4thoffice.board.list.page-v5.17+json
+       -->
+  <complexType name="ListOfBoardsPage_22">
+    <sequence>
+      <element name="BoardList" type="bc:ListOfBoards_22" minOccurs="1" />
+      <element name="Paging" type="bc:Paging_13" minOccurs="1" />
+    </sequence>
+  </complexType>
+  <element name="ListOfBoardsPage_22" type="bc:ListOfBoardsPage_22" />
+  
+  <!-- Personal board.
      - Version: 5.17
      - Content types:
        - application/vnd.4thoffice.board.personal-v5.17+xml 
        - application/vnd.4thoffice.board.personal-v5.17+json
-    -->
+       -->
   <complexType name ="BoardPersonal_21">
     <complexContent>
       <extension base="bc:ResourceBase_13">
@@ -2986,7 +3034,7 @@
      - Content types:
        - application/vnd.4thoffice.board.list-v5.17+xml 
        - application/vnd.4thoffice.board.list-v5.17+json
-    -->
+       -->
   <complexType name="ListOfBoards_21">
     <sequence>
       <element name="Board" type="bc:BoardPersonal_21" minOccurs="0" maxOccurs="unbounded"/>
@@ -2999,7 +3047,7 @@
      - Content types:
        - application/vnd.4thoffice.board.list.page-v5.17+xml 
        - application/vnd.4thoffice.board.list.page-v5.17+json
-    -->
+       -->
   <complexType name="ListOfBoardsPage_21">
     <sequence>
       <element name="BoardList" type="bc:ListOfBoards_21" minOccurs="1" />
@@ -3838,7 +3886,7 @@
 
   <!-- Menu resource.
      - Version: 5.18
-     - Content types:
+     - Media types:
        - application/vnd.4thoffice.menu-v5.18+xml 
        - application/vnd.4thoffice.menu-v5.18+json
        -->
