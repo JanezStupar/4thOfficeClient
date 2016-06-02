@@ -1646,20 +1646,7 @@
     </sequence>
     </complexType>
   <element name="Feed_19" type="bc:Feed_19" />
-  
-  <!-- Feed resource 
-     - Version: 5.8
-     - Content types:
-       - application/vnd.4thoffice.feed-v5.8+xml
-       - application/vnd.4thoffice.feed-v5.8+json
-   -->
-  <complexType name ="Feed_18">
-    <sequence>
-      <element name="DiscussionListPage" type="bc:ListOfDiscussionsPage_18" minOccurs="1" />
-    </sequence>
-    </complexType>
-  <element name="Feed_18" type="bc:Feed_18" />
-  
+    
   <!--======================================================================-->
   <!--== Discussion ========================================================-->
 
@@ -4874,9 +4861,18 @@
     <sequence>
 	    <element name="Successful" type="boolean" minOccurs="1" />
 	    <element name="Message" type="string" minOccurs="0" />
+	    <element name="ErrorCode" type="string" minOccurs="0" />
     </sequence>
   </complexType>
   <element name="Result_1" type="bc:Result_1"/>
+
+  <!-- Error Code -->
+  <simpleType name="ErrorCode">
+    <restriction base="string">
+      <enumeration value="AttachmentTooLarge"/>
+    </restriction>
+  </simpleType>
+  <element name="ErrorCode" type="bc:ErrorCode"/>
  
   <!-- Localized result -->
   <complexType name ="LocalizedResult_1">
