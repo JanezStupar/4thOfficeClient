@@ -2165,6 +2165,33 @@
     </complexContent>
   </complexType>
   <element name="Post_18" type="bc:Post_18" />
+  
+  <!-- Post resource.
+     - Version: 5.0
+     - Content types:
+       - application/vnd.4thoffice.post-v5.0+xml 
+       - application/vnd.4thoffice.post-v5.0+json
+       -->
+  <complexType name="Post_15">
+    <complexContent>
+      <extension base="bc:ResourceBase_13">
+        <sequence>
+          <!-- Created date and time-->
+          <element name="Created" type="dateTime" minOccurs="0" nillable="true" />
+          <!-- Post text. -->
+          <element name="Text" type ="string" minOccurs="0" />
+          <element name="ShareList" type ="bc:ListOfResources_13" minOccurs="0" />
+          <!-- Parent id (optional). If set, reply to parent post is created. -->
+          <element name="ParentId" type ="string" minOccurs="0" />
+          <!-- Attached files. -->
+          <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
+          <element name="Author" type="bc:User_14" minOccurs="0" />
+          <element name="StreamId" type ="string" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="Post_15" type="bc:Post_15" />
       
   <!--======================================================================-->
   <!--== Post preview ======================================================-->
@@ -2501,6 +2528,73 @@
     </restriction>
   </simpleType>
   <element name="AppointmentResponseType" type="bc:AppointmentResponseType"/>
+  
+  <!--======================================================================-->
+  <!--== Contact card ======================================================-->
+
+  <!-- Contact Card
+     - Version: 5.18
+     - Content types:
+       - application/vnd.4thoffice-contact.card-v5.18+xml
+       - application/vnd.4thoffice-contact.card-v5.18+json
+  -->
+  <complexType name="ContactCard_22">
+    <complexContent>
+      <extension base="bc:User_14">
+        <sequence>
+          <element name="Organization" type="boolean" minOccurs="0" />
+          <element name="Notes" type="string" minOccurs="0" />
+          <element name="Position" type="string" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="ContactCard_22" type="bc:ContactCard_22"/>
+
+  <!-- List of contact card items -->
+  <complexType name="ListOfContactCardItem_22">
+    <sequence>
+      <element name="ContactCardItem" type="bc:ContactCardItem_22" minOccurs="1" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="ListOfContactCardItem_22" type="bc:ListOfContactCardItem_22"/>
+
+  <!-- List of contact card items -->
+  <complexType name="ContactCardItem_22">
+    <sequence>
+      <element name="Value" type="string" minOccurs="1" />
+      <element name="Type" type="string" minOccurs="1" />
+    </sequence>
+  </complexType>
+  <element name="ContactCardItem_22" type="bc:ContactCardItem_22"/>
+
+  <!-- Contact Card Item Types -->
+  <simpleType name="ContactCardItemType">
+    <restriction base="string">
+      <enumeration value="Work fax"/>
+      <enumeration value="Work"/>
+      <enumeration value="Home fax"/>
+      <enumeration value="Home"/>
+      <enumeration value="Text" />
+      <enumeration value="Voice"/>
+      <enumeration value="Fax"/>
+      <enumeration value="Cell"/>
+      <enumeration value="Video"/>
+      <enumeration value="Pager" />
+      <enumeration value="Textphone"/>
+      <enumeration value="Car" />
+      <enumeration value="ISDN"/>
+      <enumeration value="Primary"/>
+      <enumeration value="Voice"/>
+      <enumeration value="Assistant"/>
+      <enumeration value="TTY/TDD" />
+      <enumeration value="Callback" />
+      <enumeration value="Radio"/>
+      <enumeration value="Company"/>
+      <enumeration value="Unknown"/>
+    </restriction>
+  </simpleType>
+  <element name="ContactCardItemType" type="bc:ContactCardItemType"/>
 
   <!--======================================================================-->
   <!--== Badge =============================================================-->
@@ -3217,8 +3311,10 @@
            - cleanup of data contract -->
       <enumeration value="V20" />
       <!-- Changes:
-           - reminder list updated notification -->
-      <enumeration value="V21" />
+           - reminder list updated notification
+           - assistant nudge dropped
+           - cleanup of data contract -->
+      <enumeration value="V22" />
     </restriction>
   </simpleType>
   <element name="NotificationVersion" type="bc:NotificationVersion"/>
@@ -3262,28 +3358,28 @@
   <element name="ListOfNotificationTriggers_18" type="bc:ListOfNotificationTriggers_18"/>
 
   <!-- Notification list page.
-     - Version: 5.17
+     - Version: 5.18
      - Content types:
-       - application/vnd.4thoffice.notification.list.page-v5.17+xml 
-       - application/vnd.4thoffice.notification.list.page-v5.17+json
-    -->
-  <complexType name="ListOfNotificationsPage_21">
+       - application/vnd.4thoffice.notification.list.page-v5.18+xml 
+       - application/vnd.4thoffice.notification.list.page-v5.18+json
+        -->
+  <complexType name="ListOfNotificationsPage_22">
     <sequence>
       <element name="LastNotificationId" type="string" minOccurs="0" />
-      <element name="NotificationListPage" type="bc:ListOfNotifications_21" minOccurs="1" />
+      <element name="NotificationListPage" type="bc:ListOfNotifications_22" minOccurs="1" />
       <element name="Paging" type="bc:Paging_13" minOccurs="1" />
     </sequence>
   </complexType>
-  <element name="ListOfNotificationsPage_21" type="bc:ListOfNotificationsPage_21" />
+  <element name="ListOfNotificationsPage_22" type="bc:ListOfNotificationsPage_22" />
   
-  <complexType name="ListOfNotifications_21">
+  <complexType name="ListOfNotifications_22">
     <sequence>
-      <element name="Notification" type="bc:NotificationBase_21" minOccurs="0" maxOccurs="unbounded"/>
+      <element name="Notification" type="bc:NotificationBase_22" minOccurs="0" maxOccurs="unbounded"/>
     </sequence>
   </complexType>
-  <element name="ListOfNotifications_21" type="bc:ListOfNotifications_21"/>
+  <element name="ListOfNotifications_22" type="bc:ListOfNotifications_22"/>
   
-  <complexType name ="NotificationBase_21">
+  <complexType name ="NotificationBase_22">
     <sequence>
 	    <element name="Id" type="string" minOccurs="0" />
       <element name="Recipient" type="bc:User_14" minOccurs="1" />
@@ -3293,77 +3389,76 @@
       <element name="Sender" type="bc:User_14" minOccurs="1" />
     </sequence>
   </complexType>
-  <element name="NotificationBase_21" type="bc:NotificationBase_21"/>
+  <element name="NotificationBase_22" type="bc:NotificationBase_22"/>
   
-  <complexType name ="NotificationStreamUpdated_21">
+  <complexType name ="NotificationStreamUpdated_22">
     <complexContent>
-      <extension base="bc:NotificationBase_21">
+      <extension base="bc:NotificationBase_22">
         <sequence>
-          <element name="Scope" type="string" minOccurs="0" />
-          <element name="StreamId" type="string" minOccurs="0" />
+          <element name="Stream" type="bc:StreamBase_22" minOccurs="0" />
         </sequence>
       </extension>
     </complexContent>
   </complexType>
-  <element name="NotificationStreamUpdated_21" type="bc:NotificationStreamUpdated_21"/>
+  <element name="NotificationStreamUpdated_22" type="bc:NotificationStreamUpdated_22"/>
   
-  <complexType name ="NotificationUserTokenInvalid_21">
+  <complexType name ="NotificationUserTokenInvalid_22">
     <complexContent>
-      <extension base="bc:NotificationBase_21">
+      <extension base="bc:NotificationBase_22">
         <sequence>
           <element name="TokenProvider" type="string" minOccurs="0" />
         </sequence>
       </extension>
     </complexContent>
   </complexType>
-  <element name="NotificationUserTokenInvalid_21" type="bc:NotificationUserTokenInvalid_21"/>
+  <element name="NotificationUserTokenInvalid_22" type="bc:NotificationUserTokenInvalid_22"/>
 
-  <complexType name ="NotificationMailboxMissing_21">
+  <complexType name ="NotificationMailboxMissing_22">
     <complexContent>
-      <extension base="bc:NotificationBase_21">
+      <extension base="bc:NotificationBase_22">
         <sequence>
           <element name="TokenProvider" type="string" minOccurs="0" />
         </sequence>
       </extension>
     </complexContent>
   </complexType>
-  <element name="NotificationMailboxMissing_21" type="bc:NotificationMailboxMissing_21"/>
+  <element name="NotificationMailboxMissing_22" type="bc:NotificationMailboxMissing_22"/>
 
-  <complexType name ="NotificationOnboardingComplete_21">
+  <complexType name ="NotificationOnboardingComplete_22">
     <complexContent>
-      <extension base="bc:NotificationBase_21">
+      <extension base="bc:NotificationBase_22">
         <sequence>
         </sequence>
       </extension>
     </complexContent>
   </complexType>
-  <element name="NotificationOnboardingComplete_21" type="bc:NotificationOnboardingComplete_21"/>
+  <element name="NotificationOnboardingComplete_22" type="bc:NotificationOnboardingComplete_22"/>
    
-  <complexType name ="NotificationPostCreated_21">
+  <complexType name ="NotificationPostCreated_22">
     <complexContent>
-      <extension base="bc:NotificationBase_21">
+      <extension base="bc:NotificationBase_22">
         <sequence>
-          <element name="Post" type="bc:Post_20" minOccurs="0" />
+          <element name="Post" type="bc:Post_22" minOccurs="0" />
         </sequence>
       </extension>
     </complexContent>
   </complexType>
-  <element name="NotificationPostCreated_21" type="bc:NotificationPostCreated_21"/>
+  <element name="NotificationPostCreated_22" type="bc:NotificationPostCreated_22"/>
 
-  <complexType name ="NotificationCardUpdated_21">
+  <complexType name ="NotificationCardUpdated_22">
     <complexContent>
-      <extension base="bc:NotificationBase_21">
+      <extension base="bc:NotificationBase_22">
         <sequence>
-          <element name="Card" type="bc:DiscussionCard_20" minOccurs="0" />
+          <element name="Card" type="bc:DiscussionCard_22" minOccurs="0" />
         </sequence>
       </extension>
     </complexContent>
   </complexType>
-  <element name="NotificationCardUpdated_21" type="bc:NotificationCardUpdated_21"/> 
+  <element name="NotificationCardUpdated_22" type="bc:NotificationCardUpdated_22"/> 
 
-  <complexType name ="NotificationUserStatusChange_21">
+  <complexType name ="NotificationUserStatusChange_22">
     <complexContent>
-      <extension base="bc:NotificationBase_21">
+      <extension base="bc:NotificationBase_22">
         <sequence>
           <element name="OnlineStatus" type="string" minOccurs="0" nillable="true" />
           <element name="LastActivityAt" type="dateTime" minOccurs="0" nillable="true" />
@@ -3371,50 +3466,33 @@
       </extension>
     </complexContent>
   </complexType>
-  <element name="NotificationUserStatusChange_21" type="bc:NotificationUserStatusChange_21"/>
-
-  <!-- Notification about assistant nudge. 
-     - Version: 5.17
-     - Content types:
-       - application/vnd.4thoffice.notification.assistant.nudge-5.17+xml
-       - application/vnd.4thoffice.notification.assistant.nudge-5.17+json
-       -->
-  <complexType name ="NotificationAssistantNudge_21">
-    <complexContent>
-      <extension base="bc:NotificationBase_21">
-        <sequence>
-           <element name="ShowAssistant" type="boolean" minOccurs="0" nillable="true" />         
-        </sequence>
-      </extension>
-    </complexContent>
-  </complexType>
-  <element name="NotificationAssistantNudge_21" type="bc:NotificationAssistantNudge_21"/>
+  <element name="NotificationUserStatusChange_22" type="bc:NotificationUserStatusChange_22"/>
   
   <!-- Notification about updated action list. 
-     - Version: 5.17
+     - Version: 5.18
      - Content types:
-       - application/vnd.4thoffice.notification.action.list.updated-5.17+xml
-       - application/vnd.4thoffice.notification.action.list.updated-5.17+json
+       - application/vnd.4thoffice.notification.reminder.due-5.18+xml
+       - application/vnd.4thoffice.notification.reminder.due-5.18+json
        -->
-  <complexType name ="NotificationActionListUpdated_21">
+  <complexType name ="NotificationReminderDue_22">
     <complexContent>
-      <extension base="bc:NotificationBase_21">
+      <extension base="bc:NotificationBase_22">
         <sequence>
         </sequence>
       </extension>
     </complexContent>
   </complexType>
-  <element name="NotificationActionListUpdated_21" type="bc:NotificationActionListUpdated_21"/>
+  <element name="NotificationReminderDue_22" type="bc:NotificationReminderDue_22"/>
     
   <!-- Notification about updated reminder list. 
-     - Version: 5.17
+     - Version: 5.18
      - Content types:
-       - application/vnd.4thoffice.notification.reminder.list.updated-5.17+xml
-       - application/vnd.4thoffice.notification.reminder.list.updated-5.17+json
+       - application/vnd.4thoffice.notification.reminder.list.updated-5.18+xml
+       - application/vnd.4thoffice.notification.reminder.list.updated-5.18+json
        -->
-  <complexType name ="NotificationReminderListUpdated_21">
+  <complexType name ="NotificationReminderListUpdated_22">
     <complexContent>
-      <extension base="bc:NotificationBase_21">
+      <extension base="bc:NotificationBase_22">
         <sequence>
           <element name="BadgeCountPending" type="int" minOccurs="0" nillable="true"/>
           <element name="BadgeCountToday" type="int" minOccurs="0" nillable="true"/>
@@ -3424,8 +3502,8 @@
       </extension>
     </complexContent>
   </complexType>
-  <element name="NotificationReminderListUpdated_21" type="bc:NotificationReminderListUpdated_21"/>
-  
+  <element name="NotificationReminderListUpdated_22" type="bc:NotificationReminderListUpdated_22"/>
+    
   <!-- Notification list page.
      - Version: 5.15
      - Content types:
@@ -3732,7 +3810,7 @@
   
   <!-- Stream base.
      - Version: 5.3
-     - Content types:
+     - Media types:
        - application/vnd.4thoffice.stream-5.18+xml
        - application/vnd.4thoffice.stream-5.18+json
        -->
@@ -3765,9 +3843,9 @@
   </complexType>
   <element name="StreamBase_22" type="bc:StreamBase_22"/>
   
-   <!-- User stream.
+  <!-- User stream.
      - Version: 5.18
-     - Content types:
+     - Media types:
        - application/vnd.4thoffice.stream.user-5.18+xml
        - application/vnd.4thoffice.stream.user-5.18+json
        -->
@@ -3783,8 +3861,8 @@
   <element name="StreamUser_22" type="bc:StreamUser_22"/>
   
   <!-- Group stream.
-     - Version: 5.3
-     - Content types:
+     - Version: 5.18
+     - Media types:
        - application/vnd.4thoffice.stream.group-5.18+xml
        - application/vnd.4thoffice.stream.group-5.18+json
        -->
@@ -3792,22 +3870,25 @@
     <complexContent>
       <extension base="bc:StreamBase_22">
         <sequence>
-          <element name="Description" type ="string" minOccurs="0" />
-          <element name="MemberInfo" type ="bc:GroupMemberInfo_22" minOccurs="0" />
-          <element name="AdministratorInfo" type ="bc:GroupMemberInfo_22" minOccurs="0" />
+          <element name="Group" type ="bc:Group_17" minOccurs="0" />
         </sequence>
       </extension>
     </complexContent>
   </complexType>
   <element name="StreamGroup_22" type="bc:StreamGroup_22"/>
-
-  <complexType name ="GroupMemberInfo_22">
+  
+  <!-- Stream visibility.
+     - Version: 5.18
+     - Media types:
+       - application/vnd.4thoffice.stream.visibility-5.18+xml
+       - application/vnd.4thoffice.stream.visibility-5.18+json
+       -->
+  <complexType name ="StreamVisibility_22">
     <sequence>
-      <element name="Count" type="integer" minOccurs="0" nillable="true" />
-      <element name="Users" type ="bc:ListOfUsers_14" minOccurs="0" />
+      <element name="IsVisible" type ="boolean" minOccurs="1" />
     </sequence>
   </complexType>
-  <element name="GroupMemberInfo_22" type="bc:GroupMemberInfo_22"/> 
+  <element name="StreamVisibility_22" type="bc:StreamVisibility_22"/>
   
   <!-- User stream resource 
      - Version: 5.3
@@ -3864,9 +3945,14 @@
   <!-- Menu scope -->
   <simpleType name="MenuScope">
     <restriction base="string">
+      <!--Filter for important streams (visible flag set).-->
       <enumeration value="Important"/>
+      <!-- Filter for muted streams (deprecated).-->
       <enumeration value="Others"/>
+      <!-- Filter for unread important streams (deprecated). -->
       <enumeration value="UnreadImportant"/>
+      <!--Filter for muted streams (visible flag not set).-->
+      <enumeration value="Muted"/>
     </restriction>
   </simpleType>
   <element name="MenuScope" type="bc:MenuScope" />
@@ -3879,9 +3965,9 @@
        -->
   <complexType name="Menu_22">
     <sequence>
-      <element name="StreamListPage" type="bc:ListOfStreamsPage_22" minOccurs="1" />
+      <element name="StreamListPage" type="bc:ListOfStreamsPage_22" minOccurs="0" />
       <!--Total count of unread items.-->
-      <element name="BadgeCountTotal" type="int" minOccurs="0" nillable="true"/>
+      <element name="BadgeCountTotal" type="integer" minOccurs="0" nillable="true"/>
       <element name="HasUnreadItems" type="boolean" minOccurs="0" nillable="true"/>
     </sequence>
   </complexType>
@@ -4861,7 +4947,7 @@
     <sequence>
 	    <element name="Successful" type="boolean" minOccurs="1" />
 	    <element name="Message" type="string" minOccurs="0" />
-	    <element name="ErrorCode" type="string" minOccurs="0" />
+            <element name="ErrorCode" type="string" minOccurs="0" />
     </sequence>
   </complexType>
   <element name="Result_1" type="bc:Result_1"/>
