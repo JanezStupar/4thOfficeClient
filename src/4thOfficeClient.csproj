@@ -42,9 +42,11 @@
       <HintPath>..\packages\HttpRestClient.0.2.1\lib\net40\HttpRestClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiClient.cs" />
+    <Compile Include="DataContract\ApiDataContract.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DataContract\ApiDataContract.xsd">

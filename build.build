@@ -29,21 +29,21 @@
     </delete>
   </target>
 
+  <target name="dataContract" failonerror="true">
   <property name="apiDataContract" value="ApiDataContract" />
+  <property name="schemaApiNamespace" value="ApiDataContract"/>
   <exec workingdir="src/DataContract" program="${svcutil}">
     <arg value="${apiDataContract}.xsd" />
     <arg value="/dconly" />
     <arg value="/serializable" />
     <arg value="/importXmlTypes" />
     <arg value="/serializer:DataContractSerializer" />
-    <!--<arg value="/namespace:*,${schemaSdkNamespace}.WebService" />-->
-    <arg value="/o:${apiDataContract}.cs" />
-  </exec>s
-  <copymodified
-    file="${apiDataContract}.cs"
-    tofile="${apiDataContract}.Designer.cs"/>
+    <arg value="/namespace:*,${schemaApiNamespace}" />-->
+    <arg value="/o:${apiDataContract}.Designer.cs" />
+  </exec>
+  </target>
 
-  <target name="dev">
+  <target name="dev" depends="dataContract">
   </target>
 
   <target name="build" depends="dev">
