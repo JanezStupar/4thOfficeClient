@@ -24,7 +24,7 @@
   <!-- List of api index links -->
   <complexType name="ListOfHttpHeaders_12">
     <sequence>
-      <element name="HttpHeader" type="bc:HttpHeader_12" minOccurs="1" maxOccurs="unbounded"/>
+      <element name="HttpHeader" type="bc:HttpHeader_12" minOccurs="0" maxOccurs="unbounded"/>
     </sequence>
   </complexType>
   <element name="ListOfHttpHeaders_12" type="bc:ListOfHttpHeaders_12"/>
@@ -42,7 +42,7 @@
   <!-- List of api index links -->
   <complexType name="ListOfApiIndexLinks_1">
     <sequence>
-      <element name="ApiIndexLink" type="bc:ApiIndexLink_1" minOccurs="1" maxOccurs="unbounded"/>
+      <element name="ApiIndexLink" type="bc:ApiIndexLink_1" minOccurs="0" maxOccurs="unbounded"/>
     </sequence>
   </complexType>
   <element name="ListOfApiIndexLinks_1" type="bc:ListOfApiIndexLinks_1"/>
@@ -62,7 +62,7 @@
   <!-- Content type list -->
   <complexType name ="ListOfContentTypes">
     <sequence>
-      <element name="ContentType" type ="string" minOccurs="1" maxOccurs="unbounded" />
+      <element name="ContentType" type ="string" minOccurs="0" maxOccurs="unbounded" />
     </sequence>
   </complexType>
   <element name="ListOfContentTypes" type="bc:ListOfContentTypes"/>
@@ -70,7 +70,7 @@
   <!-- Api index options list -->
   <complexType name ="ListOfApiIndexOptions_4">
     <sequence>
-      <element name="Options" type ="bc:ApiIndexOptions_1" minOccurs="1" maxOccurs="unbounded" />
+      <element name="Options" type ="bc:ApiIndexOptions_1" minOccurs="0" maxOccurs="unbounded" />
     </sequence>
   </complexType>
   <element name="ListOfApiIndexOptions_4" type="bc:ListOfApiIndexOptions_4"/>
@@ -91,6 +91,7 @@
       <element name="Description" type ="string" minOccurs="1" />
       <element name="Parameters" type ="bc:ListOfApiIndexParameters_1" minOccurs="0" />
       <element name="HttpHeaderList" type="bc:ListOfHttpHeaders_12" minOccurs="0" />
+      <element name="HttpErrorList" type="bc:ListOfApiIndexErrors_1" minOccurs="0" />
     </sequence>
   </complexType>
   <element name="ApiIndexMethod_1" type="bc:ApiIndexMethod_1"/>
@@ -98,7 +99,7 @@
   <!-- Api Index method list -->
   <complexType name ="ListOfApiIndexMethods_1">
     <sequence>
-      <element name="ApiIndexMethod" type ="bc:ApiIndexMethod_1" minOccurs="1" maxOccurs="unbounded" />
+      <element name="ApiIndexMethod" type ="bc:ApiIndexMethod_1" minOccurs="0" maxOccurs="unbounded" />
     </sequence>
   </complexType>
   <element name="ListOfApiIndexMethods_1" type="bc:ListOfApiIndexMethods_1"/>
@@ -119,10 +120,27 @@
   <!-- Api Index parameter list -->
   <complexType name ="ListOfApiIndexParameters_1">
     <sequence>
-      <element name="ApiIndexParameter" type ="bc:ApiIndexParameter_1" minOccurs="1" maxOccurs="unbounded" />
+      <element name="ApiIndexParameter" type ="bc:ApiIndexParameter_1" minOccurs="0" maxOccurs="unbounded" />
     </sequence>
   </complexType>
   <element name="ListOfApiIndexParameters_1" type="bc:ListOfApiIndexParameters_1"/>
+  
+  <!-- Api Index error -->
+  <complexType name ="ApiIndexError_1">
+    <sequence>
+      <element name="Description" type ="string" minOccurs="1" />
+      <element name="HttpStatusCode" type ="string" minOccurs="1" />
+      <element name="ErrorCode" type ="string" minOccurs="0" />
+    </sequence>
+  </complexType>
+  <element name="ApiIndexError_1" type="bc:ApiIndexError_1"/>
+  
+  <complexType name ="ListOfApiIndexErrors_1">
+    <sequence>
+      <element name="Error" type ="bc:ApiIndexError_1" minOccurs="0" maxOccurs="unbounded" />
+    </sequence>
+  </complexType>
+  <element name="ListOfApiIndexErrors_1" type="bc:ListOfApiIndexErrors_1"/>
 
   <!--======================================================================-->
   <!--== Logon =============================================================-->
@@ -367,6 +385,8 @@
           <element name="Created" type="dateTime" minOccurs="0" nillable="true" />
           <!-- Modified date and time -->
           <element name="Modified" type="dateTime" minOccurs="0" nillable="true" />
+          <!--Boolean flag indicating if file resource was copied from attachment file of existing post.-->
+          <element name="ForwardedCopy" type="boolean" minOccurs="0" nillable="true" />
         </sequence>
       </extension>
     </complexContent>
@@ -1037,8 +1057,12 @@
                 which can be used for further authorization purposes. -->
           <element name="Token" type ="bc:AccessToken_14" minOccurs="0" />
           <element name="OnboardingComplete" type="boolean" minOccurs="0" nillable="true" />
+          <!-- User's online status. -->
           <element name="OnlineStatus" type="string" minOccurs="0" nillable="true" />
+          <!-- Date and time of user's last activity. -->
           <element name="LastActivityAt" type="dateTime" minOccurs="0" nillable="true" />
+          <!-- Date and time when user was registered. -->
+          <element name="Registered" type="dateTime" minOccurs="0" nillable="true" />
         </sequence>
       </extension>
     </complexContent>
@@ -2035,22 +2059,24 @@
           <element name="Text" type ="string" minOccurs="0" />
           <element name="ShareList" type ="bc:ListOfResources_13" minOccurs="0" />
           <element name="VisibilityListCount" type ="int" minOccurs="0" nillable="true" />
-          <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
           <element name="Author" type="bc:User_14" minOccurs="0" />
           <element name="Parent" type ="bc:DiscussionBase_22" minOccurs="0" />
 
+          <!--List of attached files.-->
+          <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
+          
           <element name="Unread" type ="boolean" minOccurs="0" nillable="true" />
           <!-- Date time when unread flag was cleared by post recipient. -->
           <element name="UnreadClearedAt" type ="dateTime" minOccurs="0" nillable="true" />
 
           <element name="ImportedViaEmail" type ="boolean" minOccurs="0" nillable="true" />
-          <element name="ForwardedCopy" type="boolean" minOccurs="0" nillable="true" />
           <element name="ErrorSending" type ="boolean" minOccurs="0" nillable="true" />
+          <element name="ForwardedCopy" type="boolean" minOccurs="0" nillable="true" />
           
           <element name="BodyFormat" type="bc:BodyFormat_18" minOccurs="0" />
           <element name="BodyHtml" type="string" minOccurs="0" />
           <element name="BodySnippet" type="string" minOccurs="0" />
-          
+                   
           <!-- Flag indicating if a post has beed managed by assistant. -->
           <element name="ManagedByAssistant" type ="boolean" minOccurs="0" nillable="true" />
           <element name="ReminderType" type ="string" minOccurs="0" />
@@ -2063,7 +2089,7 @@
     </complexContent>
   </complexType>
   <element name="Post_22" type="bc:Post_22" />
-
+ 
   <complexType name ="PostSeparator_22">
     <complexContent>
       <extension base="bc:ResourceBase_13">
@@ -2104,10 +2130,12 @@
           <element name="Text" type ="string" minOccurs="0" />
           <element name="ShareList" type ="bc:ListOfResources_13" minOccurs="0" />
           <element name="VisibilityListCount" type ="int" minOccurs="0" nillable="true" />
-          <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
           <element name="Author" type="bc:User_14" minOccurs="0" />
           <element name="Parent" type ="bc:DiscussionBase_20" minOccurs="0" />
 
+          <!--List of attached files.-->
+          <element name="Files" type="bc:ListOfFiles_14" minOccurs="0" />
+          
           <element name="Unread" type ="boolean" minOccurs="0" nillable="true" />
           <!--Date time when unread flag was cleared by post recipient.-->
           <element name="UnreadClearedAt" type ="dateTime" minOccurs="0" nillable="true" />
@@ -2571,9 +2599,10 @@
   <!-- Contact Card Item Types -->
   <simpleType name="ContactCardItemType">
     <restriction base="string">
-      <enumeration value="Work fax"/>
+      <enumeration value="Unknown"/>
+      <enumeration value="WorkFax"/>
       <enumeration value="Work"/>
-      <enumeration value="Home fax"/>
+      <enumeration value="HomeFax"/>
       <enumeration value="Home"/>
       <enumeration value="Text" />
       <enumeration value="Voice"/>
@@ -2585,13 +2614,11 @@
       <enumeration value="Car" />
       <enumeration value="ISDN"/>
       <enumeration value="Primary"/>
-      <enumeration value="Voice"/>
       <enumeration value="Assistant"/>
-      <enumeration value="TTY/TDD" />
+      <enumeration value="TTY_TDD" />
       <enumeration value="Callback" />
       <enumeration value="Radio"/>
       <enumeration value="Company"/>
-      <enumeration value="Unknown"/>
     </restriction>
   </simpleType>
   <element name="ContactCardItemType" type="bc:ContactCardItemType"/>
