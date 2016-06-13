@@ -819,7 +819,7 @@
     </restriction>
   </simpleType>
   <element name="SearchStatusFilter" type="bc:SearchStatusFilter"/>
-  
+    
   <!-- Search scope. --> 
   <simpleType name="SearchScope">
     <restriction base='string'>
@@ -830,6 +830,61 @@
   </simpleType>
   <element name="SearchScope" type="bc:SearchScope"/>
 
+  <!-- Search results. 
+     - Version: 5.18
+     - Content types:
+      - application/4thoffice.search.results-5.15+xml
+      - application/4thoffice.search.results-5.15+json
+      -->
+  <complexType name="SearchResults_22">
+    <sequence>
+      <element name="ResultGroups" type="bc:ListOfSearchGroups_22" minOccurs="1" />
+    </sequence>
+  </complexType>
+  <element name="SearchResults_22" type="bc:SearchResults_22"/>
+  
+  <complexType name="ListOfSearchGroups_22">
+    <sequence>
+      <element name="Group" type="bc:SearchGroup_22" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="ListOfSearchGroups_22" type="bc:ListOfSearchGroups_22"/>
+  
+  <complexType name ="SearchGroup_22">
+    <sequence>
+      <element name="Id" type="string" minOccurs="1" />
+	    <element name="Name" type="string" minOccurs="1" />
+      <element name="ResultPage" type="bc:ListOfSearchResourcesPage_22" minOccurs="1" />
+    </sequence>
+  </complexType>
+  <element name="SearchGroup_22" type="bc:SearchGroup_22"/>
+  
+  <complexType name="ListOfSearchResourcesPage_22">
+    <sequence>
+      <element name="SearchResourceList" type="bc:ListOfSearchResources_22" minOccurs="1" />
+      <element name="Paging" type="bc:Paging_13" minOccurs="1" />
+    </sequence>
+  </complexType>
+  <element name="ListOfSearchResourcesPage_22" type="bc:ListOfSearchResourcesPage_22" />
+
+  <complexType name="ListOfSearchResources_22">
+    <sequence>
+      <element name="SearchResource" type="bc:SearchResource_22" minOccurs="1" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <element name="ListOfSearchResources_22" type="bc:ListOfSearchResources_22"/>
+  
+  <complexType name ="SearchResource_22">
+    <sequence>
+      <element name="Resource" type="bc:ResourceBase_13" minOccurs="1" />
+      <element name="Highlights" type="bc:ListOfStrings" minOccurs="0" />
+      <element name="SearchHit" type="string" minOccurs="0" />
+      <element name="BadgeCount" type="integer" minOccurs="0" nillable="true" />
+      <element name="Weight" type="decimal" minOccurs="0" nillable="true" />
+    </sequence>
+  </complexType>
+  <element name="SearchResource_22" type="bc:SearchResource_22"/>
+  
   <!-- Search results. 
      - Version: 5.15
      - Content types:
@@ -1780,8 +1835,8 @@
     </complexContent>
   </complexType>
   <element name="DiscussionChat_22" type="bc:DiscussionChat_22" />
-  
-  <complexType name ="DiscussionSeparator_22">
+
+  <complexType name ="DiscussionSeparatorBase_22">
     <complexContent>
       <extension base="bc:DiscussionBase_22">
         <sequence>
@@ -1790,9 +1845,29 @@
       </extension>
     </complexContent>
   </complexType>
-  <element name="DiscussionSeparator_22" type="bc:DiscussionSeparator_22" />
+  <element name="DiscussionSeparatorBase_22" type="bc:DiscussionSeparatorBase_22" />
   
-   <complexType name="ListOfDiscussionsPage_20">
+  <complexType name ="DiscussionChatSeparator_22">
+    <complexContent>
+      <extension base="bc:DiscussionSeparatorBase_22">
+        <sequence>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="DiscussionChatSeparator_22" type="bc:DiscussionChatSeparator_22" />
+  
+  <complexType name ="DiscussionCardSeparator_22">
+    <complexContent>
+      <extension base="bc:DiscussionSeparatorBase_22">
+        <sequence>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="DiscussionCardSeparator_22" type="bc:DiscussionCardSeparator_22" />
+    
+  <complexType name="ListOfDiscussionsPage_20">
     <sequence>
       <element name="DiscussionList" type="bc:ListOfDiscussions_20" minOccurs="1" />
       <element name="Paging" type="bc:Paging_13" minOccurs="1" />
@@ -2359,6 +2434,20 @@
   </complexType>
   <element name="SignatureImage_20" type="bc:SignatureImage_20"/>
 
+  <!--======================================================================-->
+  <!--== Invoice ===========================================================-->
+
+  <complexType name ="Invoice_22">
+    <complexContent>
+      <extension base="bc:Post_22">
+        <sequence>
+          <element name="Price" type="string" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  <element name="Invoice_22" type="bc:Invoice_22"/> 
+  
   <!--======================================================================-->
   <!--== Appointment =======================================================-->
 
@@ -4943,7 +5032,7 @@
     </complexContent>
   </complexType>
   <element name="StatisticsGroupActivity_20" type="bc:StatisticsGroupActivity_20"/>
-    
+
   <!--======================================================================-->
   <!--== Flags ============================================================-->
 
@@ -4974,7 +5063,7 @@
     <sequence>
 	    <element name="Successful" type="boolean" minOccurs="1" />
 	    <element name="Message" type="string" minOccurs="0" />
-            <element name="ErrorCode" type="string" minOccurs="0" />
+      <element name="ErrorCode" type="string" minOccurs="0" />
     </sequence>
   </complexType>
   <element name="Result_1" type="bc:Result_1"/>
@@ -4982,7 +5071,10 @@
   <!-- Error Code -->
   <simpleType name="ErrorCode">
     <restriction base="string">
+      <!--Attachment size exceeds the allowable limit.-->
       <enumeration value="AttachmentTooLarge"/>
+      <!--Since id value is invalid or out of date.-->
+      <enumeration value="InvalidSinceId"/>
     </restriction>
   </simpleType>
   <element name="ErrorCode" type="bc:ErrorCode"/>
